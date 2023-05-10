@@ -84,21 +84,13 @@ In summary, the JVM is the runtime environment responsible for executing Java by
 A Java Development Environment (JDE), also referred to as an Integrated Development Environment (IDE), is a software tool that provides a comprehensive set of features and tools to facilitate Java application development. It offers an integrated and streamlined environment for writing, compiling, debugging, and deploying Java code. Here are some key aspects of a Java Development Environment:
 
 1. Code Editing: A JDE provides a code editor with features like syntax highlighting, code completion, code templates, and formatting. These features help developers write clean, error-free code and increase productivity.
-
 2. Compilation and Building: A JDE typically includes a Java compiler that translates Java source code into bytecode, which can be executed by the Java Virtual Machine (JVM). It also offers features for managing project dependencies, generating executable files (JAR or WAR files), and building complex software systems.
-
 3. Debugging: JDEs come with debugging capabilities that allow developers to step through their code, set breakpoints, inspect variables, and analyze the program's execution flow. Debugging tools help identify and fix issues, making the development process more efficient.
-
 4. Integrated Build Systems: Many JDEs support integrated build systems like Apache Maven or Gradle. These build systems automate tasks such as dependency management, building, testing, and packaging of Java projects. They provide standardized project structures and make it easier to manage complex projects.
-
 5. Version Control Integration: JDEs often include version control system integrations, such as Git, Subversion, or Mercurial. These integrations allow developers to manage source code versions, collaborate with others, and track changes within the development environment.
-
 6. Libraries and Frameworks Support: JDEs provide tools and integrations for working with Java libraries and frameworks. They offer features like code generation, template projects, and wizards to simplify the usage of popular frameworks such as Spring, Hibernate, JavaFX, and others.
-
 7. Testing and Profiling: JDEs offer tools for unit testing, automated testing, and performance profiling of Java applications. These tools help ensure code quality, identify bottlenecks, and optimize the application's performance.
-
 8. Deployment and Application Servers: JDEs often provide features for deploying Java applications to servers or containers. They offer integration with application servers like Apache Tomcat, Jetty, or JBoss, enabling developers to test and deploy their applications seamlessly.
-
 9. Collaboration and Documentation: Some JDEs offer features for collaboration, including code sharing, pair programming, and integration with issue tracking systems. They also provide tools for generating documentation from source code comments, making it easier to maintain and share project documentation.
 
 Examples of popular Java Development Environments include:
