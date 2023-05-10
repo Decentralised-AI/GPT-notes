@@ -42,23 +42,14 @@ Overall, the history of JavaScript is a story of rapid evolution and growth, dri
 ## Characteristics of the JavaScript language
 
 1. High-level language: JavaScript is a high-level programming language, meaning that it is designed to be easily read and understood by humans.
-
 2. Object-oriented: JavaScript is an object-oriented language, which means it uses objects to represent data and behavior.
-
 3. Interpreted: JavaScript is an interpreted language, meaning that the code is executed by an interpreter rather than being compiled into machine code.
-
 4. Dynamic: JavaScript is a dynamically typed language, which means that variable types are determined at runtime.
-
 5. Functional: JavaScript supports functional programming paradigms, such as higher-order functions and closures.
-
 6. Client-side scripting: JavaScript is commonly used for client-side scripting, allowing for interactive web pages and user interfaces.
-
 7. Browser integration: JavaScript is integrated into most web browsers, making it an essential part of web development.
-
 8. Asynchronous programming: JavaScript supports asynchronous programming through mechanisms like callbacks and promises, allowing for non-blocking code execution.
-
 9. Cross-platform: JavaScript can be run on a variety of platforms, including web browsers, servers, and mobile devices.
-
 10. Large developer community: JavaScript has a large and active developer community, with a vast ecosystem of libraries, frameworks, and tools available for use.
 
 ## Platforms
@@ -66,7 +57,6 @@ Overall, the history of JavaScript is a story of rapid evolution and growth, dri
 The most common environments for JavaScript development:
 
 1. Browser: The browser is the most common environment for JavaScript development, as it is the primary way in which JavaScript is used to create interactive and dynamic web pages. All modern web browsers support JavaScript, and they provide a built-in JavaScript engine that can interpret and execute JavaScript code. Some popular browsers for JavaScript development include Chrome, Firefox, Safari, and Edge.
-
 2. Node.js: Node.js is a server-side JavaScript runtime environment that allows developers to run JavaScript code outside of the browser. It is built on top of the Chrome V8 JavaScript engine and provides a set of APIs for server-side programming. Node.js can be used to create web servers, command-line tools, and other types of server-side applications. Some popular frameworks for Node.js development include Express, Nest.js, and Hapi.
 
 For client-side web development, the browser environment is essential, while for server-side development, Node.js is a popular choice.
