@@ -17,3 +17,6 @@ tags:
 markdown: kramdown
 highlighter: rouge
 permalink: pretty
+
+
+remote_theme: daattali/beautiful-jekyll@5.0.0
