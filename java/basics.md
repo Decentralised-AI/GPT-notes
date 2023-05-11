@@ -319,13 +319,13 @@ In Java, operators and expressions are fundamental components of the language th
 1. Operators:
    - Operators are symbols that perform specific operations on one or more operands (variables, constants, or expressions).
    - Java supports various types of operators, including:
-     - Arithmetic Operators: Perform basic mathematical operations like addition (+), subtraction (-), multiplication (*), division (/), and modulus (%).
-     - Assignment Operators: Assign values to variables, such as the equals sign (=), combined with arithmetic operators (+=, -=, *=, /=, %=).
-     - Comparison Operators: Compare two values and return a boolean result, such as equal to (==), not equal to (!=), greater than (>), less than (<), etc.
-     - Logical Operators: Perform logical operations on boolean values, such as logical AND (&&), logical OR (||), and logical NOT (!).
-     - Bitwise Operators: Perform operations on individual bits of integer values, such as bitwise AND (&), bitwise OR (|), bitwise XOR (^), bitwise complement (~), etc.
-     - Increment/Decrement Operators: Increase or decrease the value of a variable by one, such as increment (++), decrement (--).
-     - Conditional Operator (Ternary Operator): Allows you to write compact conditional expressions, such as condition ? expression1 : expression2.
+     - Arithmetic Operators: Perform basic mathematical operations like `addition (+), subtraction (-), multiplication (*), division (/), and modulus (%)`.
+     - Assignment Operators: Assign values to variables, such as `the equals sign (=), combined with arithmetic operators (+=, -=, *=, /=, %=)`.
+     - Comparison Operators: Compare two values and return a boolean result, such as `equal to (==), not equal to (!=), greater than (>), less than (<)`, etc.
+     - Logical Operators: Perform logical operations on boolean values, such as `logical AND (&&), logical OR (||), and logical NOT (!)`.
+     - Bitwise Operators: Perform operations on individual bits of integer values, such as `bitwise AND (&), bitwise OR (|), bitwise XOR (^), bitwise complement (~)`, etc.
+     - Increment/Decrement Operators: Increase or decrease the value of a variable by one, such as `increment (++), decrement (--)`.
+     - Conditional Operator (Ternary Operator): Allows you to write compact conditional expressions, such as `condition ? expression1 : expression2`.
      - And more, including bitwise shift operators, instance of operator, etc.
 2. Expressions:
    - Expressions are combinations of operators, operands, and method invocations that evaluate to a single value.
