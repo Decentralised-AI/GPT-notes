@@ -7,7 +7,7 @@ tags:
   - Backend
   - Frontend
   - Full stack
-remote_theme: daattali/beautiful-jekyll@5.0.0
+
 
 ###########################################################
 ### Welcome to Beautiful Jekyll!
@@ -303,6 +303,9 @@ exclude:
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
+  - jekyll-remote-theme
+
+remote_theme: daattali/beautiful-jekyll@5.0.0
 
 # Beautiful Jekyll / Dean Attali
 # 2fc73a3a967e97599c9763d05e564189
