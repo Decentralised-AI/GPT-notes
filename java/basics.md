@@ -560,3 +560,100 @@ Conversions, coercions, and castings are mechanisms in Java used to transform or
      ```
 
 In summary, conversions involve explicitly transforming one data type into another, while coercions are automatic type conversions performed by the compiler to ensure compatibility. Castings, on the other hand, are explicit operations that allow you to convert values between compatible data types, especially for narrowing conversions. Understanding these mechanisms is important for working with different data types and ensuring the correct behavior of your Java programs.
+
+
+## Exceptions
+
+In Java, exceptions are a way to handle and manage runtime errors and exceptional conditions that may occur during the execution of a program. When an exceptional situation occurs, such as an error or an unexpected condition, an exception is thrown. This allows the program to handle the exception gracefully and take appropriate actions. Here's an explanation of exceptions in Java:
+
+1. Exception Hierarchy:
+   - Java provides a hierarchy of exception classes that are derived from the `Throwable` class.
+   - The two main categories of exceptions are checked exceptions and unchecked exceptions.
+   - Checked Exceptions: These are exceptions that the compiler requires you to handle or declare using the `throws` clause. Examples include `IOException`, `SQLException`, and `ClassNotFoundException`.
+   - Unchecked Exceptions: These are exceptions that do not need to be declared or caught explicitly. They are subclasses of `RuntimeException` and typically represent programming errors or exceptional conditions that are not anticipated. Examples include `NullPointerException`, `ArrayIndexOutOfBoundsException`, and `IllegalArgumentException`.
+
+2. Exception Handling:
+   - Exception handling is the process of dealing with exceptions in a controlled manner.
+   - Try-Catch Block: The `try-catch` block is used to catch and handle exceptions. Code that may throw an exception is enclosed within the `try` block, and corresponding exception handling code is placed within the `catch` block. If an exception occurs in the `try` block, it is caught by the appropriate `catch` block based on the type of exception.
+   - Example:
+     ```java
+     try {
+         // Code that may throw an exception
+     } catch (ExceptionType1 e1) {
+         // Exception handling for ExceptionType1
+     } catch (ExceptionType2 e2) {
+         // Exception handling for ExceptionType2
+     } finally {
+         // Optional 'finally' block executed regardless of whether an exception occurs or not
+     }
+     ```
+
+3. Throwing Exceptions:
+   - In addition to handling exceptions, you can also explicitly throw exceptions using the `throw` keyword. This is useful when you encounter exceptional conditions that cannot be handled locally and need to be propagated to the calling code.
+   - Example:
+     ```java
+     public void divide(int dividend, int divisor) throws ArithmeticException {
+         if (divisor == 0) {
+             throw new ArithmeticException("Cannot divide by zero");
+         }
+         int result = dividend / divisor;
+         System.out.println("Result: " + result);
+     }
+     ```
+
+4. Exception Propagation:
+   - When an exception is thrown from a method, it can be caught and handled by the calling method. This process is known as exception propagation.
+   - If an exception is not caught within a method, it is propagated up the call stack until it is caught or until the program terminates if it is an unchecked exception.
+
+5. Finally Block:
+   - The `finally` block is an optional block that follows the `try-catch` block. It is used to specify code that should be executed regardless of whether an exception occurs or not.
+   - The `finally` block is commonly used for cleaning up resources, such as closing files or releasing database connections.
+
+Exception handling in Java allows you to write robust and reliable code by handling potential errors and exceptional conditions. By using try-catch blocks, throwing and propagating exceptions, and leveraging the exception hierarchy, you can effectively handle and manage exceptions in your Java programs.
+
+Here's an example of how to create a user-defined exception in Java:
+
+```java
+class InsufficientBalanceException extends Exception {
+    public InsufficientBalanceException(String message) {
+        super(message);
+    }
+}
+
+class BankAccount {
+    private double balance;
+
+    public BankAccount(double initialBalance) {
+        balance = initialBalance;
+    }
+
+    public void withdraw(double amount) throws InsufficientBalanceException {
+        if (amount > balance) {
+            throw new InsufficientBalanceException("Insufficient balance to withdraw " + amount);
+        }
+        balance -= amount;
+        System.out.println("Withdrawal successful. New balance: " + balance);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount(1000);
+        try {
+            account.withdraw(1500);
+        } catch (InsufficientBalanceException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+```
+
+In this example, we define a custom exception called `InsufficientBalanceException` that extends the `Exception` class. The `InsufficientBalanceException` class has a constructor that takes a message as an argument and passes it to the `super()` method to set the error message.
+
+We have a `BankAccount` class that represents a bank account with a `withdraw()` method. In the `withdraw()` method, if the requested amount exceeds the current balance, we throw an `InsufficientBalanceException` with an appropriate error message.
+
+In the `Main` class, we create a `BankAccount` object and try to withdraw an amount that exceeds the account balance. We wrap the `account.withdraw()` method call in a try-catch block to catch the `InsufficientBalanceException` and handle it by printing the error message.
+
+When you run this code, it will throw an `InsufficientBalanceException` because the requested withdrawal amount exceeds the initial balance of the account. The exception will be caught in the catch block, and the error message will be displayed.
+
+By creating custom exceptions, you can define and handle exceptional situations that are specific to your application's requirements.
