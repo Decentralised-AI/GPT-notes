@@ -138,6 +138,61 @@ It's important to note that more complex Java projects typically involve multipl
 
 By following these steps, you can write and run Java programs on your local machine. As your projects grow, using an IDE with features like code completion, debugging, and project management can greatly enhance your development experience.
 
+## Basic Input and Output (I/O) operations
+
+In Java, basic Input and Output (I/O) operations are performed using the `java.io` package. This package provides classes and methods to interact with various input and output streams, allowing you to read from and write to different sources, such as the console, files, or network connections. Here's an overview of basic I/O in Java:
+
+1. Output (Writing Data):
+   - `System.out`: The `System.out` object represents the standard output stream, typically the console. You can use it to display output using the `println()` or `print()` methods. For example:
+     ```java
+     System.out.println("Hello, World!"); // Prints a line
+     System.out.print("Java"); // Prints without a line break
+     ```
+
+2. Input (Reading Data):
+   - `System.in`: The `System.in` object represents the standard input stream, typically the console. You can use it to read input from the user using various input methods.
+   - `Scanner` class: The `Scanner` class provides methods to read different types of input, such as strings, numbers, and tokens. It can be used to read from the console or other input sources. Here's an example:
+     ```java
+     import java.util.Scanner;
+
+     Scanner scanner = new Scanner(System.in);
+     System.out.print("Enter your name: ");
+     String name = scanner.nextLine(); // Read a line of input
+     System.out.println("Hello, " + name);
+     ```
+
+3. File I/O:
+   - Java provides classes for reading from and writing to files, such as `FileInputStream`, `FileOutputStream`, `BufferedReader`, `BufferedWriter`, and more.
+   - Reading from a file: You can use classes like `FileInputStream` and `BufferedReader` to read data from a file. Here's an example:
+     ```java
+     import java.io.BufferedReader;
+     import java.io.FileReader;
+     import java.io.IOException;
+
+     BufferedReader reader = new BufferedReader(new FileReader("filename.txt"));
+     String line;
+     while ((line = reader.readLine()) != null) {
+         System.out.println(line);
+     }
+     reader.close();
+     ```
+   - Writing to a file: You can use classes like `FileOutputStream` and `BufferedWriter` to write data to a file. Here's an example:
+     ```java
+     import java.io.BufferedWriter;
+     import java.io.FileWriter;
+     import java.io.IOException;
+
+     BufferedWriter writer = new BufferedWriter(new FileWriter("filename.txt"));
+     writer.write("Hello, World!");
+     writer.newLine();
+     writer.close();
+     ```
+
+4. Exception Handling:
+   - When working with I/O operations, it's important to handle exceptions that may occur, such as `IOException`, which can be thrown when reading from or writing to files. It's recommended to use try-catch blocks to handle exceptions appropriately.
+
+These are some of the basic concepts of I/O in Java. By using the `System.out` and `System.in` streams, the `Scanner` class, and file I/O classes, you can perform common input and output operations in your Java programs. Remember to handle exceptions and close resources properly to ensure efficient and reliable I/O operations.
+
 ## Hello World
 
 To create and execute a Java "Hello, World!" program, follow these steps:
@@ -332,3 +387,176 @@ In Java, operators and expressions are fundamental components of the language th
    - It's important to understand the behavior of these operators and their potential impact on your program's logic.
 
 Understanding operators and expressions is crucial for performing computations and making decisions in Java programs. By using the appropriate operators and constructing meaningful expressions, you can manipulate data and control the flow of your program effectively.
+
+## Control structures
+
+In Java, control structures are used to control the flow of program execution based on certain conditions or criteria. They allow you to make decisions, repeat code blocks, and selectively execute different parts of your program. Here are the main control structures in Java:
+
+1. Conditional Statements:
+   - If Statement: The if statement is used to execute a block of code if a specified condition is true. It has the following syntax:
+     ```java
+     if (condition) {
+         // Code to be executed if the condition is true
+     } else {
+         // Code to be executed if the condition is false
+     }
+     ```
+
+   - Switch Statement: The switch statement allows you to select one of many code blocks to be executed based on the value of an expression. It has the following syntax:
+     ```java
+     switch (expression) {
+         case value1:
+             // Code to be executed if the expression matches value1
+             break;
+         case value2:
+             // Code to be executed if the expression matches value2
+             break;
+         // ...
+         default:
+             // Code to be executed if none of the cases match
+             break;
+     }
+     ```
+
+2. Looping Statements:
+   - For Loop: The for loop is used to execute a block of code repeatedly for a fixed number of times. It has the following syntax:
+     ```java
+     for (initialization; condition; update) {
+         // Code to be executed in each iteration
+     }
+     ```
+
+   - While Loop: The while loop is used to repeatedly execute a block of code as long as a specified condition is true. It has the following syntax:
+     ```java
+     while (condition) {
+         // Code to be executed as long as the condition is true
+     }
+     ```
+
+   - Do-While Loop: The do-while loop is similar to the while loop but guarantees that the code block is executed at least once before checking the condition. It has the following syntax:
+     ```java
+     do {
+         // Code to be executed
+     } while (condition);
+     ```
+
+   - Enhanced for Loop (Foreach Loop): The enhanced for loop simplifies iterating over elements in an array or collection. It has the following syntax:
+     ```java
+     for (elementType element : collection) {
+         // Code to be executed for each element
+     }
+     ```
+
+3. Jump Statements:
+   - Break Statement: The break statement is used to exit a loop or switch statement prematurely.
+   - Continue Statement: The continue statement is used to skip the remaining code in a loop and move to the next iteration.
+   - Return Statement: The return statement is used to exit a method and optionally return a value.
+
+Control structures provide the ability to control the flow of your program, make decisions, and repeat code as necessary. By using conditional statements, looping statements, and jump statements effectively, you can create programs that perform specific tasks based on different conditions and requirements.
+
+## Strings
+
+In Java, the `String` class represents a sequence of characters. It is used to store and manipulate textual data. Here are some important aspects of working with strings in Java:
+
+1. String Declaration and Initialization:
+   - To declare a string variable, use the `String` keyword, followed by the variable name. For example:
+     ```java
+     String message;
+     ```
+   - Strings can be initialized using string literals, enclosed in double quotes. For example:
+     ```java
+     String greeting = "Hello, World!";
+     ```
+
+2. String Concatenation:
+   - You can concatenate strings using the `+` operator or the `concat()` method. For example:
+     ```java
+     String firstName = "John";
+     String lastName = "Doe";
+     String fullName = firstName + " " + lastName;
+     // fullName = "John Doe"
+     ```
+     ```java
+     String str1 = "Hello";
+     String str2 = "World";
+     String result = str1.concat(", ").concat(str2);
+     // result = "Hello, World"
+     ```
+
+3. String Length:
+   - You can get the length of a string using the `length()` method. For example:
+     ```java
+     String text = "Hello, World!";
+     int length = text.length();
+     // length = 13
+     ```
+
+4. String Comparison:
+   - To compare strings for equality, use the `equals()` method or the `equalsIgnoreCase()` method (ignoring case). For example:
+     ```java
+     String str1 = "Hello";
+     String str2 = "Hello";
+     boolean isEqual = str1.equals(str2);
+     // isEqual = true
+     ```
+   - To compare strings lexicographically (based on the Unicode values of the characters), use the `compareTo()` method. It returns a negative value if the string is lexicographically less, a positive value if it is lexicographically greater, or zero if the strings are equal.
+
+5. String Manipulation:
+   - The `String` class provides various methods for manipulating strings, such as:
+     - `charAt(int index)`: Returns the character at the specified index.
+     - `substring(int startIndex)`: Returns a substring starting from the specified index.
+     - `substring(int startIndex, int endIndex)`: Returns a substring within the specified range of indices.
+     - `toUpperCase()`: Converts the string to uppercase.
+     - `toLowerCase()`: Converts the string to lowercase.
+     - `trim()`: Removes leading and trailing whitespaces from the string.
+     - `replace(char oldChar, char newChar)`: Replaces occurrences of a specified character with a new character.
+     - `split(String regex)`: Splits the string into an array of substrings based on a delimiter.
+
+6. Immutable Nature of Strings:
+   - In Java, strings are immutable, meaning that once a string is created, its value cannot be changed.
+   - However, string manipulation operations return new string objects with the modified values.
+
+Strings are widely used in Java for tasks like displaying messages, reading input, manipulating textual data, and more. Understanding how to declare, initialize, concatenate, compare, and manipulate strings allows you to work effectively with textual information in your Java programs.
+
+## Conversions, coercions, and castings
+
+Conversions, coercions, and castings are mechanisms in Java used to transform or convert values between different data types. While they serve a similar purpose, there are some differences between these concepts:
+
+1. Conversions:
+   - Conversions involve explicitly transforming one data type into another.
+   - Conversions can be either widening or narrowing.
+   - Widening Conversion: Also known as implicit conversion, it occurs when a value of a smaller data type is automatically converted into a larger data type without any data loss. For example:
+     ```java
+     int x = 5;
+     double y = x; // Widening conversion from int to double
+     ```
+   - Narrowing Conversion: Also known as explicit conversion, it occurs when a value of a larger data type is explicitly converted into a smaller data type. This conversion may result in potential data loss and requires explicit casting. For example:
+     ```java
+     double x = 5.7;
+     int y = (int) x; // Narrowing conversion from double to int
+     ```
+
+2. Coercions:
+   - Coercions are automatic type conversions performed by the Java compiler to ensure compatibility in expressions and operations.
+   - Coercions are typically applied in situations where different data types are involved in an operation or expression.
+   - Numeric Promotion: It is a type of coercion that occurs when performing operations involving different numeric types. The compiler automatically promotes smaller types to larger types to avoid data loss. For example:
+     ```java
+     int x = 5;
+     double y = 2.3;
+     double result = x + y; // Numeric promotion of int to double
+     ```
+   - Boolean Conversion: In certain situations, a boolean value may be coerced to another data type. In such cases, `true` is converted to `1` and `false` is converted to `0`.
+   - String Conversion: Java provides automatic conversion between strings and other data types through string concatenation. When a string is concatenated with a non-string value, the non-string value is automatically converted to a string representation.
+
+3. Castings:
+   - Casting is an explicit operation that allows you to convert a value of one data type to another compatible data type.
+   - Casting is typically used for narrowing conversions or when you want to explicitly change the data type of a value.
+   - Casting is denoted by enclosing the target data type in parentheses and placing it before the value to be cast.
+   - Casting is required when converting from a larger type to a smaller type, as it may result in data loss.
+   - Example of casting:
+     ```java
+     double x = 5.7;
+     int y = (int) x; // Casting double to int
+     ```
+
+In summary, conversions involve explicitly transforming one data type into another, while coercions are automatic type conversions performed by the compiler to ensure compatibility. Castings, on the other hand, are explicit operations that allow you to convert values between compatible data types, especially for narrowing conversions. Understanding these mechanisms is important for working with different data types and ensuring the correct behavior of your Java programs.
