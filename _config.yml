@@ -1,7 +1,21 @@
 title: GPT-notes
 description: "All you need to learn Web Development in a site organized by me and thanks to chat-GPT."
 email: "rafaaznar@gmail.com"
-
+exclude: [".rvmrc", ".rbenv-version", "README.md", "changelog.md"]
+author:
+  name: Rafael Aznar
+  url: https://rafaelaznar.github.io/
+tags:
+  - DAW
+  - Web development
+  - Backend
+  - Frontend
+  - Full stack
+template:
+  name: github-pages-with-jekyll
+  repo: github-pages-with-jekyll-template
 # Build settings
 
 markdown: kramdown
+highlighter: rouge
+permalink: pretty
