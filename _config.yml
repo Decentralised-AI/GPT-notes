@@ -11,9 +11,7 @@ tags:
   - Backend
   - Frontend
   - Full stack
-template:
-  name: github-pages-with-jekyll
-  repo: github-pages-with-jekyll-template
+
 # Build settings
 
 markdown: kramdown
