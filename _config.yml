@@ -1,25 +1,13 @@
 title: GPT-notes
 description: "All you need to learn Web Development in a site organized by me and thanks to chat-GPT."
 
-
-
 tags:
   - DAW
   - Web development
   - Backend
   - Frontend
   - Full stack
-
-# Build settings
-
-markdown: kramdown
-highlighter: rouge
-permalink: pretty
-
-
 remote_theme: daattali/beautiful-jekyll@5.0.0
-
-
 
 ###########################################################
 ### Welcome to Beautiful Jekyll!
