@@ -1,3 +1,10 @@
+---
+layout: page
+title: GPT-notes
+subtitle: All you need to be a web developer
+---
+
+
 # GPT-notes
 
 ## Languages
