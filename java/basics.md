@@ -247,6 +247,50 @@ To create and execute a Java "Hello, World!" program, follow these steps:
 
 Congratulations! You have created and executed a Java "Hello, World!" program. This basic program serves as a starting point for learning Java and verifying that your Java development environment is properly set up.
 
+## Main class
+
+In Java projects, the main class plays a crucial role as the entry point for the application. The main class contains the `main` method, which is the starting point of program execution. When you run a Java application, the Java Virtual Machine (JVM) searches for the main class specified in the command-line arguments or in the project configuration, and then executes the `main` method within that class.
+
+Here are some key points about the main class in Java projects:
+
+1. Naming Convention:
+   - The main class can have any name, but by convention, it is often named `Main` or follows a meaningful naming convention that describes the application.
+   - The main class should be declared as `public`.
+   - Example:
+     ```java
+     public class Main {
+         public static void main(String[] args) {
+             // Program execution starts here
+         }
+     }
+     ```
+
+2. `main` Method:
+   - The `main` method is a special method that serves as the entry point for the application.
+   - It must have the exact signature: `public static void main(String[] args)`.
+   - The `main` method can accept command-line arguments as an array of strings (`String[] args`). These arguments can be used to pass inputs or configuration parameters to the application.
+   - The `main` method contains the code that is executed when the application starts.
+   - Example:
+     ```java
+     public static void main(String[] args) {
+         // Code to be executed
+     }
+     ```
+
+3. Execution Flow:
+   - When the application is run, the JVM looks for the main class specified either through the command-line arguments or in the project configuration.
+   - It loads the main class into memory and starts executing the `main` method.
+   - The statements inside the `main` method are executed sequentially, defining the flow of the program.
+   - The program execution continues until the `main` method is completed or an explicit `return` statement is encountered.
+
+4. Application Logic:
+   - The main class typically serves as the starting point of the application and may contain initialization code, setup, and the logic to execute the desired functionality of the program.
+   - It may create instances of other classes, call methods, handle user input, interact with external systems, or orchestrate the flow of the program.
+
+The main class is an essential component in Java projects as it provides the entry point for the application's execution. It contains the `main` method, where you define the logic that should be executed when the application starts. By convention, the main class is named `Main` and is declared as `public`.
+
+
+
 ## Data types
 
 Java has several built-in data types that allow you to store and manipulate different kinds of values. Here are the main data types in Java:
