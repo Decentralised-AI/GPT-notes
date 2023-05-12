@@ -1161,6 +1161,48 @@ There are two types of wildcards in Java generics: the upper bounded wildcard (`
 
 Wildcards in Java generics provide a way to write more flexible and reusable code that can work with a range of types. They allow you to create generic classes, interfaces, or methods that can operate on unknown types or specific subtypes, providing flexibility and type safety. Wildcards are commonly used when defining generic collections, utility methods, or APIs that need to accommodate a variety of types.
 
+Here's an example using wildcards in Java generics:
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class WildcardExample {
+    public static void printList(List<?> list) {
+        for (Object item : list) {
+            System.out.println(item);
+        }
+    }
+
+    public static void main(String[] args) {
+        List<Integer> integerList = new ArrayList<>();
+        integerList.add(10);
+        integerList.add(20);
+        integerList.add(30);
+
+        List<String> stringList = new ArrayList<>();
+        stringList.add("Hello");
+        stringList.add("World");
+
+        System.out.println("Printing integerList:");
+        printList(integerList);
+
+        System.out.println("Printing stringList:");
+        printList(stringList);
+    }
+}
+```
+
+In this example, we have a method `printList` that takes a `List` with a wildcard `?` as the type parameter. The `printList` method can accept a `List` of any type because the wildcard allows for flexibility.
+
+In the `main` method, we create two lists: `integerList` of type `List<Integer>` and `stringList` of type `List<String>`. We then call the `printList` method and pass these lists as arguments.
+
+The `printList` method iterates over the given list using a for-each loop and prints each item. Since the `list` parameter has a wildcard, we can't know the exact type of the items, so we use the `Object` type to iterate over them.
+
+When we run the program, it prints the elements of both `integerList` and `stringList` without any issues, even though they are of different types. The wildcard allows us to create a single method that can work with different types of lists.
+
+Using wildcards in Java generics provides flexibility when working with generic types. It allows us to create generic methods or classes that can accept different types without being tightly bound to a specific type.
+
 ### Bounded Type Parameters
 
 Bounded type parameters in Java generics allow you to restrict the types that can be used as type arguments in a generic class, interface, or method. By using bounded type parameters, you can define generic code that operates on a specific range of types or their subtypes.
