@@ -837,8 +837,269 @@ This is a common method in the Shape class
 
 This example demonstrates how the abstract class `Shape` can provide a common base implementation for the `draw()` method, while still allowing subclasses to override it. The use of interfaces, abstract classes, and polymorphism provides a flexible and extensible approach to working with different shapes in a factory pattern.
 
+## Generics
 
+Java generics provide a way to create reusable and type-safe code by allowing classes and methods to be parameterized with types. Generics enable you to define classes, interfaces, and methods that can work with different types without sacrificing type safety at compile time. 
 
+Generics provide several benefits, including type safety, code reusability, and improved code readability. They allow you to write generic algorithms and data structures that can work with different types, providing flexibility and reducing the need for type casting. Generics are widely used in Java collections, such as ArrayList, HashSet, and HashMap, to ensure type safety and to enable generic programming paradigms.
+
+Here are the key concepts and usage of generics in Java:
+
+### Type Parameters
+
+Type parameters in Java generics are placeholders for actual types that will be supplied when using generic classes, interfaces, or methods. They allow you to create reusable and type-safe code by making the code generic and independent of specific types.
+
+Here are the key points about type parameters in Java generics:
+
+1. Syntax:
+   - Type parameters are defined using angle brackets `< >` after the class, interface, or method name.
+   - Type parameter names are typically single uppercase letters, but any valid identifier can be used.
+   - Example:
+     ```java
+     class MyClass<T> {
+         // Class implementation using type parameter T
+     }
+     
+     interface MyInterface<U> {
+         // Interface methods using type parameter U
+     }
+     
+     <V> void myMethod(V param) {
+         // Method implementation using type parameter V
+     }
+     ```
+
+2. Naming Conventions:
+   - By convention, single uppercase letters (such as T, U, V) are used as type parameter names to represent arbitrary types.
+   - However, you can use any valid identifier as the type parameter name.
+   - Choose a type parameter name that is meaningful and reflects the purpose of the parameter in your code.
+
+3. Parameterizing Classes and Interfaces:
+   - Type parameters are specified when creating instances of generic classes or implementing generic interfaces.
+   - Actual types are provided as type arguments when instantiating the class or implementing the interface.
+   - Example:
+     ```java
+     MyClass<Integer> myInt = new MyClass<>();
+     MyInterface<String> myStr = new MyInterfaceImpl<>();
+     ```
+
+4. Multiple Type Parameters:
+   - You can define multiple type parameters for a class, interface, or method, separated by commas.
+   - Example:
+     ```java
+     class Pair<K, V> {
+         private K key;
+         private V value;
+         
+         // Class implementation using type parameters K and V
+     }
+     
+     <T, U> void processPair(Pair<T, U> pair) {
+         // Method implementation using type parameters T and U
+     }
+     ```
+
+5. Type Parameter Constraints:
+   - Type parameters can be constrained to specific types or interfaces using upper bounds or lower bounds.
+   - Upper bounds restrict the type parameter to a specific class or interface or its subtypes.
+   - Lower bounds restrict the type parameter to a specific class or interface or its supertypes.
+   - Example:
+     ```java
+     class MyClass<T extends Number> {
+         // Class implementation using type parameter T, which must be a subtype of Number
+     }
+     
+     <T extends Comparable<T>> void compare(T obj1, T obj2) {
+         // Method implementation with a type parameter T that must implement Comparable
+     }
+     ```
+
+Type parameters in Java generics provide flexibility and enable the creation of generic code that can work with different types. They allow you to write reusable and type-safe code, avoiding the need for explicit type casting and improving code readability. Type parameters are widely used in Java collections, algorithms, and APIs to create generic classes, interfaces, and methods that can operate on various types while maintaining type safety.
+
+### Parameterized Types
+
+Parameterized types in Java generics refer to the use of actual type arguments to specify the specific types that a generic class, interface, or method will work with. They allow you to create instances of generic classes or invoke generic methods with specific types, providing type safety and enabling the creation of reusable code.
+
+Here are the key points about parameterized types in Java generics:
+
+1. Type Arguments:
+   - Type arguments are actual types that are provided as arguments when using a generic class, interface, or method.
+   - Type arguments replace the type parameters defined in the generic declaration.
+   - Example:
+     ```java
+     List<String> stringList = new ArrayList<>(); // Parameterized type: List<String>
+     Map<Integer, String> map = new HashMap<>(); // Parameterized type: Map<Integer, String>
+     ```
+
+2. Creating Instances:
+   - Parameterized types are used when creating instances of generic classes.
+   - Type arguments are supplied within the angle brackets after the class name.
+   - Example:
+     ```java
+     List<Integer> numbers = new ArrayList<>();
+     Set<String> stringSet = new HashSet<>();
+     ```
+
+3. Invoking Generic Methods:
+   - Parameterized types are also used when invoking generic methods.
+   - Type arguments are provided when calling the generic method.
+   - Example:
+     ```java
+     Collections.<Integer>sort(numbers); // Type argument <Integer> for the sort() method
+     MyClass.<String>myGenericMethod("Hello"); // Type argument <String> for the myGenericMethod() method
+     ```
+
+4. Type Safety:
+   - Parameterized types ensure type safety by specifying the specific types that a generic class, interface, or method will work with.
+   - Type arguments allow the compiler to perform type checking at compile-time, preventing type-related errors.
+   - The compiler can detect incompatible types or issues with type conversions.
+   - Example:
+     ```java
+     List<String> stringList = new ArrayList<>();
+     stringList.add("Hello");
+     stringList.add(42); // Error: Incompatible types, expects String
+     ```
+
+5. Raw Types:
+   - It is possible to use a generic class without providing type arguments, which results in a raw type.
+   - Raw types do not perform type checking and are less type-safe.
+   - However, raw types are still allowed for backward compatibility with pre-Java 5 code.
+   - Example:
+     ```java
+     List list = new ArrayList(); // Raw type: List (without type argument)
+     list.add("Hello");
+     list.add(42); // No compile-time error, but less type-safe
+     ```
+
+Parameterized types in Java generics allow you to create type-safe and reusable code by providing actual types for generic classes, interfaces, or methods. They improve code readability, reduce the need for explicit type casting, and help catch type-related errors at compile-time. By using parameterized types, you can write more generic and flexible code that can work with various types while maintaining type safety.
+
+### Generic Methods
+
+Generic methods in Java generics are methods that are parameterized with type parameters, allowing them to work with multiple types. They provide a way to write methods that can operate on different types while maintaining type safety and code reusability.
+
+Here are the key points about generic methods in Java generics:
+
+1. Syntax:
+   - Generic methods are declared by specifying the type parameters before the return type of the method.
+   - Type parameters are enclosed in angle brackets `< >`.
+   - Example:
+     ```java
+     public <T> void myGenericMethod(T item) {
+         // Method implementation using type parameter T
+     }
+     ```
+
+2. Type Parameters:
+   - Type parameters in generic methods are independent of the type parameters of the enclosing class or interface.
+   - Type parameters can have any valid identifier name, but by convention, a single uppercase letter is used (e.g., T, U, V).
+   - Multiple type parameters can be declared, separated by commas.
+   - Example:
+     ```java
+     public <T, U> void myGenericMethod(T item1, U item2) {
+         // Method implementation using type parameters T and U
+     }
+     ```
+
+3. Type Inference:
+   - In many cases, the type arguments for generic methods can be inferred by the compiler based on the method arguments.
+   - This allows you to invoke the generic method without explicitly specifying the type arguments.
+   - Example:
+     ```java
+     myGenericMethod("Hello"); // Inferred type argument: String
+     myGenericMethod(42); // Inferred type argument: Integer
+     ```
+
+4. Using Type Parameters:
+   - Type parameters in generic methods can be used as the method parameter types, return type, or within the method implementation.
+   - They allow you to perform operations or apply logic that is generic and independent of specific types.
+   - Example:
+     ```java
+     public <T> T processItem(T item) {
+         // Method implementation using type parameter T
+         return item;
+     }
+     ```
+
+5. Bounds for Type Parameters:
+   - Type parameters in generic methods can have bounds, similar to type parameters in generic classes or interfaces.
+   - Bounds restrict the types that can be used as type arguments.
+   - Example:
+     ```java
+     public <T extends Number> double sumNumbers(T[] numbers) {
+         // Method implementation using type parameter T, which must be a subtype of Number
+         double sum = 0;
+         for (T number : numbers) {
+             sum += number.doubleValue();
+         }
+         return sum;
+     }
+     ```
+
+Generic methods in Java generics provide flexibility and enable you to write reusable code that can work with different types. They are useful when you need to create methods that are not tied to a specific class but can operate on various types. Generic methods are commonly used in utility classes, algorithms, and APIs to provide generic behavior while maintaining type safety and code reusability.
+
+### Wildcards
+
+Wildcards in Java generics provide a way to create flexible and reusable code that can work with different types. They allow you to define generic classes, interfaces, or methods that operate on a range of unknown types or specific subtypes.
+
+There are two types of wildcards in Java generics: the upper bounded wildcard (`<?>`) and the lower bounded wildcard (`<? super T>`). Let's explore each one:
+
+1. Upper Bounded Wildcard (`<?>`):
+   - The `<?>` wildcard represents an unknown type that is a subtype of a specified upper bound.
+   - It allows the generic code to accept any type that is a subtype of the specified upper bound.
+   - It provides flexibility and allows the code to work with a range of different types.
+   - Example:
+     ```java
+     public void processList(List<? extends Number> numbers) {
+         // Process a list of numbers or its subtypes
+         // Can read from the list but cannot write into it
+     }
+     ```
+   - In the example above, the `processList` method accepts a `List` that contains elements of an unknown type, which is a subtype of `Number`. It can work with lists of `Integer`, `Double`, or any other subtype of `Number`. The method can read elements from the list but cannot add or modify elements.
+
+2. Lower Bounded Wildcard (`<? super T>`):
+   - The `<? super T>` wildcard represents an unknown type that is a supertype of a specified lower bound.
+   - It allows the generic code to accept any type that is a supertype of the specified lower bound.
+   - It provides flexibility and allows the code to work with a range of different types.
+   - Example:
+     ```java
+     public void addNumbers(List<? super Integer> numbers) {
+         // Add integers or any supertype of Integer to the list
+         // Can add elements but cannot safely read from the list
+     }
+     ```
+   - In the example above, the `addNumbers` method accepts a `List` that can contain elements of an unknown type, which is a supertype of `Integer`. It can add integers or any supertype of `Integer` to the list. The method can add elements to the list, but it cannot safely read elements as the exact type is unknown.
+
+Wildcards in Java generics provide a way to write more flexible and reusable code that can work with a range of types. They allow you to create generic classes, interfaces, or methods that can operate on unknown types or specific subtypes, providing flexibility and type safety. Wildcards are commonly used when defining generic collections, utility methods, or APIs that need to accommodate a variety of types.
+
+### Bounded Type Parameters
+
+Bounded type parameters in Java generics allow you to restrict the types that can be used as type arguments in a generic class, interface, or method. By using bounded type parameters, you can define generic code that operates on a specific range of types or their subtypes.
+
+There are two types of bounded type parameters: upper bounded type parameters and lower bounded type parameters. Let's explore each one:
+
+1. Upper Bounded Type Parameters:
+   - An upper bounded type parameter restricts the type argument to be a specific type or any of its subtypes.
+   - It is denoted by the `extends` keyword, followed by the upper bound type.
+   - Example:
+     ```java
+     public class Box<T extends Number> {
+         // Code for the generic class Box
+     }
+     ```
+   - In the example above, the type parameter `T` is bounded by the `Number` class. It means that when creating an instance of the `Box` class, the type argument for `T` must be either `Number` or one of its subtypes, such as `Integer`, `Double`, etc. This ensures that the generic class `Box` can only work with numeric types.
+
+2. Lower Bounded Type Parameters:
+   - A lower bounded type parameter restricts the type argument to be a specific type or any of its supertypes.
+   - It is denoted by the `super` keyword, followed by the lower bound type.
+   - Example:
+     ```java
+     public void processList(List<? super Integer> numbers) {
+         // Code for the method that processes a list
+     }
+     ```
+   - In the example above, the type parameter for the `numbers` list is bounded by `Integer` or any of its supertypes. It means that the method `processList` can accept a `List` of `Integer` or a supertype of `Integer`, such as `Number` or `Object`. This allows the method to work with a broader range of types.
+
+Bounded type parameters in Java generics provide a way to restrict the types that can be used in generic code, ensuring type safety and allowing for more specific operations. They allow you to define generic classes, interfaces, or methods that work with a specific range of types or their subtypes. By bounding the type parameters, you can create more specialized and reusable code that operates on a restricted set of types, enabling better code organization and preventing potential type-related errors.
 
 
 
