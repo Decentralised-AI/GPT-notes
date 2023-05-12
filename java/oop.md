@@ -702,5 +702,137 @@ Drawing a circle
 
 This demonstrates how polymorphism, based on interface implementation, allows you to treat objects of different classes as if they implement a common interface and provides a way to write code that operates on them uniformly.
 
+### Factories
 
+Here's an example of a factory pattern using interfaces and a polymorphic array of objects in Java:
 
+```java
+interface Shape {
+    void draw();
+}
+
+class Circle implements Shape {
+    @Override
+    public void draw() {
+        System.out.println("Drawing a circle");
+    }
+}
+
+class Square implements Shape {
+    @Override
+    public void draw() {
+        System.out.println("Drawing a square");
+    }
+}
+
+class ShapeFactory {
+    public Shape createShape(String type) {
+        if (type.equalsIgnoreCase("circle")) {
+            return new Circle();
+        } else if (type.equalsIgnoreCase("square")) {
+            return new Square();
+        } else {
+            throw new IllegalArgumentException("Invalid shape type");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ShapeFactory factory = new ShapeFactory();
+        Shape[] shapes = new Shape[2];
+        shapes[0] = factory.createShape("circle");
+        shapes[1] = factory.createShape("square");
+
+        for (Shape shape : shapes) {
+            shape.draw();
+        }
+    }
+}
+```
+
+In this example, we have an interface `Shape` that declares the `draw()` method. The `Circle` and `Square` classes implement the `Shape` interface and provide their own implementations for the `draw()` method.
+
+The `ShapeFactory` class acts as a factory for creating different shapes based on a given type. The `createShape()` method takes a `String` argument representing the type of shape to create. If the type is "circle," it creates and returns a `Circle` object. If the type is "square," it creates and returns a `Square` object. Otherwise, it throws an `IllegalArgumentException`.
+
+In the `Main` class, we create an instance of `ShapeFactory` and use it to create two shapes: a circle and a square. We store these shapes in a polymorphic array of type `Shape`. This means that we can store objects of different classes that implement the `Shape` interface in the same array.
+
+We then iterate over the `shapes` array using a foreach loop and call the `draw()` method on each object. Since the `draw()` method is overridden in the `Circle` and `Square` classes, the appropriate implementation is executed based on the actual type of each object.
+
+When you run the program, it will output:
+
+```
+Drawing a circle
+Drawing a square
+```
+
+This demonstrates how the factory pattern, combined with interfaces and a polymorphic array of objects, allows for the creation and manipulation of different objects based on a common interface, providing flexibility and code reusability.
+
+Here's an updated example that includes a `Shape` abstract class with a base implementation of the `draw()` method:
+
+```java
+abstract class Shape {
+    public abstract void draw();
+
+    public void commonMethod() {
+        System.out.println("This is a common method in the Shape class");
+    }
+}
+
+class Circle extends Shape {
+    @Override
+    public void draw() {
+        System.out.println("Drawing a circle");
+    }
+}
+
+class Square extends Shape {
+    @Override
+    public void draw() {
+        System.out.println("Drawing a square");
+    }
+}
+
+class ShapeFactory {
+    public Shape createShape(String type) {
+        if (type.equalsIgnoreCase("circle")) {
+            return new Circle();
+        } else if (type.equalsIgnoreCase("square")) {
+            return new Square();
+        } else {
+            throw new IllegalArgumentException("Invalid shape type");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ShapeFactory factory = new ShapeFactory();
+        Shape[] shapes = new Shape[2];
+        shapes[0] = factory.createShape("circle");
+        shapes[1] = factory.createShape("square");
+
+        for (Shape shape : shapes) {
+            shape.draw();
+            shape.commonMethod();
+        }
+    }
+}
+```
+
+In this updated example, we have introduced an abstract class `Shape` that provides a base implementation for the `draw()` method. The `draw()` method is declared as abstract in the `Shape` class, making it mandatory for subclasses to provide their own implementation. Additionally, the `Shape` class includes a non-abstract method called `commonMethod()` which has a base implementation.
+
+The `Circle` and `Square` classes extend the `Shape` class and provide their own implementations for the `draw()` method.
+
+In the `Main` class, we create an instance of `ShapeFactory` and use it to create a circle and a square. We store these shapes in a polymorphic array of type `Shape`. The `draw()` method is called on each object, and since `Circle` and `Square` are subclasses of `Shape`, they inherit the `commonMethod()` implementation as well.
+
+When you run the program, it will output:
+
+```
+Drawing a circle
+This is a common method in the Shape class
+Drawing a square
+This is a common method in the Shape class
+```
+
+This example demonstrates how the abstract class `Shape` can provide a common base implementation for the `draw()` method, while still allowing subclasses to override it. The use of interfaces, abstract classes, and polymorphism provides a flexible and extensible approach to working with different shapes in a factory pattern.
