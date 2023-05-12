@@ -916,6 +916,42 @@ Here are the key points about type parameters in Java generics:
 
 Type parameters in Java generics provide flexibility and enable the creation of generic code that can work with different types. They allow you to write reusable and type-safe code, avoiding the need for explicit type casting and improving code readability. Type parameters are widely used in Java collections, algorithms, and APIs to create generic classes, interfaces, and methods that can operate on various types while maintaining type safety.
 
+Here's an example of using type parameters in a simple generic class called `Box`. The `Box` class allows you to store and retrieve an object of any type:
+
+```java
+public class Box<T> {
+    private T item;
+
+    public void addItem(T item) {
+        this.item = item;
+    }
+
+    public T getItem() {
+        return item;
+    }
+
+    public static void main(String[] args) {
+        // Create a Box for Integer
+        Box<Integer> integerBox = new Box<>();
+        integerBox.addItem(42);
+        int number = integerBox.getItem(); // No casting needed
+        System.out.println("Number: " + number);
+
+        // Create a Box for String
+        Box<String> stringBox = new Box<>();
+        stringBox.addItem("Hello, World!");
+        String message = stringBox.getItem(); // No casting needed
+        System.out.println("Message: " + message);
+    }
+}
+```
+
+In the example above, the `Box` class is defined with a type parameter `T`. This allows the class to work with any type specified during instantiation. The `addItem` method accepts an item of type `T` and stores it in the `item` field. The `getItem` method retrieves the item of type `T` from the `item` field.
+
+In the `main` method, two instances of the `Box` class are created: one for `Integer` and one for `String`. The type parameter `T` is replaced with the actual types `Integer` and `String` when creating the instances. This ensures that the `Box` objects are restricted to storing and retrieving only the specified types.
+
+With this approach, you can create instances of `Box` for any type you need, and the type safety is maintained throughout the usage of the class. The compiler ensures that only compatible types are used, and you don't need to explicitly cast the retrieved items to their original types.
+
 ### Parameterized Types
 
 Parameterized types in Java generics refer to the use of actual type arguments to specify the specific types that a generic class, interface, or method will work with. They allow you to create instances of generic classes or invoke generic methods with specific types, providing type safety and enabling the creation of reusable code.
@@ -972,6 +1008,60 @@ Here are the key points about parameterized types in Java generics:
      ```
 
 Parameterized types in Java generics allow you to create type-safe and reusable code by providing actual types for generic classes, interfaces, or methods. They improve code readability, reduce the need for explicit type casting, and help catch type-related errors at compile-time. By using parameterized types, you can write more generic and flexible code that can work with various types while maintaining type safety.
+
+Here's last with key points about parameterized types in Java generics:
+
+```java
+public class Box<T> {
+    private T item;
+
+    public void addItem(T item) {
+        this.item = item;
+    }
+
+    public T getItem() {
+        return item;
+    }
+
+    public static void main(String[] args) {
+        // Create a Box for Integer
+        Box<Integer> integerBox = new Box<>(); // Parameterized type: Box<Integer>
+        integerBox.addItem(42);
+        int number = integerBox.getItem(); // No casting needed
+        System.out.println("Number: " + number);
+
+        // Create a Box for String
+        Box<String> stringBox = new Box<>(); // Parameterized type: Box<String>
+        stringBox.addItem("Hello, World!");
+        String message = stringBox.getItem(); // No casting needed
+        System.out.println("Message: " + message);
+    }
+}
+```
+
+Key points about parameterized types in the example:
+
+1. Parameterized Type:
+   - The class `Box` is declared with a type parameter `T` using angle brackets `<T>`.
+   - This makes `Box` a generic class that can work with any type specified during instantiation.
+   - Example: `Box<Integer>` and `Box<String>` create parameterized types of `Box` for `Integer` and `String` respectively.
+
+2. Type Argument:
+   - When creating an instance of `Box`, the type parameter `T` is replaced with an actual type called the type argument.
+   - The type argument is specified within the angle brackets during object creation.
+   - Example: `new Box<Integer>()` creates an instance of `Box` with `Integer` as the type argument.
+
+3. Type Safety:
+   - Parameterized types provide type safety by allowing the compiler to enforce type constraints at compile time.
+   - The compiler ensures that only compatible types are used with the parameterized types.
+   - Example: `integerBox.addItem(42)` adds an `Integer` value, and `int number = integerBox.getItem()` retrieves it without casting.
+
+4. No Casting Required:
+   - With parameterized types, there is no need to explicitly cast the retrieved items to their original types.
+   - The compiler automatically infers the correct type based on the type argument.
+   - Example: `int number = integerBox.getItem()` retrieves the `Integer` value without requiring casting.
+
+Using parameterized types in Java generics allows you to create generic classes, interfaces, or methods that can work with a range of types while ensuring type safety. By specifying the type argument when creating instances, you can create specialized versions of generic classes that are restricted to specific types. This improves code reusability and readability while preventing type-related errors.
 
 ### Generic Methods
 
