@@ -351,6 +351,64 @@ In the above example, the `Animal` class is the base class, and the `Dog` class 
 
 Inheritance allows you to create a hierarchy of classes, with more specialized classes inheriting common behavior and properties from more general classes. It promotes code reuse, extensibility, and modularity in object-oriented programming.
 
+## Visibility modifiers
+
+In Java, visibility modifiers (public, private, and protected) are used to control the accessibility of methods and properties (also known as fields or variables) in classes. These modifiers define the scope within which a method or property can be accessed. Here's an overview of each visibility modifier:
+
+1. Public:
+   - The `public` modifier makes a method or property accessible to all classes, regardless of their location or relationship with the declaring class.
+   - Public members can be accessed from any other class, within the same package or from different packages.
+   - Example:
+     ```java
+     public class MyClass {
+         public int publicVariable;
+         public void publicMethod() {
+             // Method implementation
+         }
+     }
+     ```
+
+2. Private:
+   - The `private` modifier restricts the accessibility of a method or property to the class in which it is declared.
+   - Private members cannot be accessed or modified from outside the class.
+   - This modifier is useful for encapsulation, as it hides the internal implementation details of a class.
+   - Example:
+     ```java
+     public class MyClass {
+         private int privateVariable;
+         private void privateMethod() {
+             // Method implementation
+         }
+     }
+     ```
+
+3. Protected:
+   - The `protected` modifier allows access to a method or property within the same package and in subclasses, even if they are in a different package.
+   - Protected members are not accessible from classes that are outside the package and are not subclasses of the declaring class.
+   - This modifier is useful for providing controlled access to inherited members.
+   - Example:
+     ```java
+     package com.example;
+
+     public class MyBaseClass {
+         protected int protectedVariable;
+         protected void protectedMethod() {
+             // Method implementation
+         }
+     }
+
+     package com.example.subpackage;
+
+     public class MySubClass extends MyBaseClass {
+         public void someMethod() {
+             protectedVariable = 10; // Accessing protected variable from subclass
+             protectedMethod(); // Accessing protected method from subclass
+         }
+     }
+     ```
+
+By using these visibility modifiers, you can control the accessibility of methods and properties in your classes, providing encapsulation, data hiding, and controlled access to class members. This helps in building well-structured and maintainable code by enforcing proper encapsulation and preventing unwanted access or modification of internal implementation details.
+
 ## Interfaces and Abstract Classes 
 
 Interfaces and abstract classes are key features of Java that facilitate abstraction, code organization, and implementation of common behavior in object-oriented programming. While they share some similarities, there are also distinct differences between them. Let's explore interfaces and abstract classes in Java:
