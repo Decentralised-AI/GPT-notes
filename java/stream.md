@@ -347,7 +347,7 @@ The output of the program will be `[1, 2, 5, 7, 9]`, as the `sorted` operation a
 
 
 
-### Terminal Operations:
+### Terminal Operations
    Terminal operations are operations that produce a final result or a side effect. When a terminal operation is invoked on a stream, the stream is consumed and cannot be reused. Terminal operations trigger the execution of the intermediate operations and produce a result.
 
    Some common terminal operations include:
@@ -372,4 +372,49 @@ The output of the program will be `[1, 2, 5, 7, 9]`, as the `sorted` operation a
 
 By combining intermediate and terminal operations, you can create powerful data processing pipelines with streams. Intermediate operations allow you to transform and manipulate the data, while terminal operations produce the final result or side effect.
 
+## Stream Pipeline
+
+Sure! Here's a larger example that demonstrates the use of a streams pipeline in Java:
+
+```java
+import java.util.Arrays;
+import java.util.List;
+
+public class StreamPipelineExample {
+    public static void main(String[] args) {
+        List<String> fruits = Arrays.asList("apple", "banana", "orange", "kiwi", "mango");
+
+        long count = fruits.stream()                       // Step 1: Create a stream from the list
+                .filter(fruit -> fruit.length() > 5)       // Step 2: Filter fruits with length greater than 5
+                .map(String::toUpperCase)                  // Step 3: Convert filtered fruits to uppercase
+                .sorted()                                  // Step 4: Sort the fruits in natural order
+                .peek(System.out::println)                 // Step 5: Print each fruit
+                .count();                                  // Step 6: Count the number of fruits
+
+        System.out.println("Total fruits: " + count);       // Output: Total fruits: 3
+    }
+}
+```
+
+In this example, we have a list of fruits. We use a streams pipeline to perform various operations on the stream of fruits:
+
+1. `stream()`: We create a stream from the list of fruits.
+2. `filter()`: We filter the fruits based on a condition - in this case, we filter fruits with a length greater than 5.
+3. `map()`: We transform each filtered fruit to uppercase using the `toUpperCase` method reference.
+4. `sorted()`: We sort the fruits in their natural order (lexicographical order).
+5. `peek()`: We print each fruit using the `peek` method, which allows us to perform a side effect operation without affecting the stream.
+6. `count()`: We count the number of fruits in the stream.
+
+Finally, we print the total number of fruits using the `count` variable.
+
+The output of the program will be:
+
+```
+APPLE
+BANANA
+ORANGE
+Total fruits: 3
+```
+
+This example demonstrates how a streams pipeline can be used to filter, transform, sort, and perform other operations on a stream of data in a concise and readable manner.
 
