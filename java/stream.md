@@ -77,7 +77,23 @@ Creating a stream from a collection or array is the starting point for leveragin
 
 ## Intermediate and terminal operations
 
-In the Java Stream API, operations can be classified into two categories: terminal operations and intermediate operations. Understanding the distinction between these two types of operations is crucial for effectively working with streams.
+In a Java Stream pipeline, the operations are divided into two types: intermediate operations and terminal operations. The order in which these operations are applied is crucial and can affect the result. Here's the order of operations in a stream pipeline:
+
+1. **Source**: The stream is created from a data source, such as a collection or an array.
+
+2. **Intermediate Operations**: Intermediate operations transform the stream elements and can be chained together. They are executed lazily, meaning they are not evaluated until a terminal operation is invoked. Some common intermediate operations include `filter`, `map`, `flatMap`, `sorted`, `distinct`, `limit`, `skip`, and `peek`. These operations allow you to modify, filter, or transform the elements of the stream.
+
+   - Intermediate operations can be applied in any order as long as the desired outcome is achieved.
+   - Intermediate operations are not executed immediately. They are stacked up and executed only when a terminal operation is called.
+
+3. **Terminal Operation**: A terminal operation produces a result or a side effect. It triggers the processing of the stream and produces a final result or performs an action. Examples of terminal operations are `forEach`, `collect`, `reduce`, `count`, `min`, `max`, and `anyMatch`.
+
+   - A stream can have only one terminal operation.
+   - Terminal operations are eager, meaning they trigger the processing of the stream and produce a result or a side effect.
+
+It's important to note that the order and combination of intermediate operations can greatly affect the efficiency and correctness of your stream processing. Additionally, the output of the stream pipeline may vary depending on the order in which the operations are applied.
+
+Remember to consider the characteristics and requirements of your data and the desired outcome when chaining intermediate operations in a stream pipeline.
 
 ### Intermediate Operations
    Intermediate operations are operations that transform a stream into another stream. These operations are usually chained together to form a processing pipeline. Intermediate operations are lazy, meaning they are not executed immediately when called. Instead, they are executed when a terminal operation is invoked on the stream.
@@ -345,6 +361,72 @@ Finally, we collect the sorted numbers into a new list using the `collect` termi
 
 The output of the program will be `[1, 2, 5, 7, 9]`, as the `sorted` operation arranges the numbers in ascending order.
 
+#### peek()
+
+In Java, the `peek` operation is an intermediate operation provided by the Stream API. It allows you to perform a non-destructive operation on each element of the stream while still preserving the stream's original elements.
+
+The `peek` operation takes a `Consumer` functional interface as a parameter. This `Consumer` is applied to each element of the stream, allowing you to perform some side effect or intermediate operation on the element. The `peek` operation does not modify the elements or the stream itself.
+
+Here's an example that demonstrates the usage of the `peek` operation:
+
+```java
+import java.util.stream.Stream;
+
+public class StreamPeekExample {
+    public static void main(String[] args) {
+        Stream<Integer> numbers = Stream.of(1, 2, 3, 4, 5);
+
+        Stream<Integer> peekedStream = numbers.peek(System.out::println);
+
+        peekedStream.forEach(System.out::println);
+    }
+}
+```
+
+In this example, we have a stream of integers created using the `of` method from `Stream`. We then apply the `peek` operation, which uses `System.out.println` as the `Consumer` to print each element of the stream. The `peek` operation does not modify the elements, it simply outputs them to the console.
+
+The `forEach` terminal operation is used to print each element of the peeked stream, again using `System.out.println`.
+
+The output of the program will be:
+
+```
+1
+2
+3
+4
+5
+1
+2
+3
+4
+5
+```
+
+As you can see, the `peek` operation allows us to perform an action on each element without modifying the original stream. In this example, the peeked stream prints each element twice, once during the `peek` operation and again during the `forEach` operation.
+
+The `peek` operation is useful when you want to perform intermediate operations for debugging or logging purposes while still maintaining the original stream elements. It is commonly used to gain insights into the data flowing through the stream without modifying it.
+
+### Short-circuiting operations
+
+Short-circuiting operations in Java Stream API are a special type of intermediate operation that can optimize the processing of a stream by avoiding unnecessary computations. These operations have the ability to terminate the stream traversal early, without processing all the elements in the stream. This behavior can provide performance improvements and efficiency in certain scenarios. Here are some common short-circuiting operations and their effects:
+
+1. **findFirst()**: This operation returns an `Optional` containing the first element of the stream, or an empty `Optional` if the stream is empty. It stops the stream traversal as soon as it finds the first element.
+
+2. **findAny()**: Similar to `findFirst()`, this operation returns an `Optional` containing any element of the stream, or an empty `Optional` if the stream is empty. It does not guarantee a specific element and can provide better performance in parallel streams.
+
+3. **anyMatch(predicate)**: This operation tests whether any element in the stream matches the given predicate. It terminates the stream traversal as soon as it finds a matching element and returns `true`. If no matching element is found, it returns `false`.
+
+4. **allMatch(predicate)**: This operation tests whether all elements in the stream match the given predicate. It stops the stream traversal and returns `false` as soon as it encounters a non-matching element. If all elements match the predicate, it returns `true`.
+
+5. **noneMatch(predicate)**: This operation tests whether no element in the stream matches the given predicate. It terminates the stream traversal as soon as it finds a matching element and returns `false`. If no matching element is found, it returns `true`.
+
+6. **limit(maxSize)**: This operation restricts the stream to a maximum number of elements specified by `maxSize`. Once the specified number of elements is reached, it stops processing further elements in the stream.
+
+7. **skip(n)**: This operation skips the first `n` elements in the stream and returns a new stream that starts from the `n+1` element onwards. It allows you to bypass a certain number of elements in the stream.
+
+The use of short-circuiting operations can significantly optimize the execution of stream operations, especially when dealing with large datasets or expensive computations. They allow you to process only the elements needed to fulfill a certain condition or retrieve a result, saving unnecessary computation time and resources.
+
+
 #### limit()
 
 In Java, the `limit` operation is an intermediate operation provided by the Stream API. It allows you to limit the size of a stream by specifying the maximum number of elements to be processed.
@@ -421,54 +503,11 @@ As you can see, the first two elements (1 and 2) are skipped, and the remaining 
 
 The `skip` operation is useful when you want to exclude a certain number of elements from the beginning of a stream, allowing you to focus on a specific subset of the data.
 
-#### peek()
 
-In Java, the `peek` operation is an intermediate operation provided by the Stream API. It allows you to perform a non-destructive operation on each element of the stream while still preserving the stream's original elements.
-
-The `peek` operation takes a `Consumer` functional interface as a parameter. This `Consumer` is applied to each element of the stream, allowing you to perform some side effect or intermediate operation on the element. The `peek` operation does not modify the elements or the stream itself.
-
-Here's an example that demonstrates the usage of the `peek` operation:
-
-```java
-import java.util.stream.Stream;
-
-public class StreamPeekExample {
-    public static void main(String[] args) {
-        Stream<Integer> numbers = Stream.of(1, 2, 3, 4, 5);
-
-        Stream<Integer> peekedStream = numbers.peek(System.out::println);
-
-        peekedStream.forEach(System.out::println);
-    }
-}
-```
-
-In this example, we have a stream of integers created using the `of` method from `Stream`. We then apply the `peek` operation, which uses `System.out.println` as the `Consumer` to print each element of the stream. The `peek` operation does not modify the elements, it simply outputs them to the console.
-
-The `forEach` terminal operation is used to print each element of the peeked stream, again using `System.out.println`.
-
-The output of the program will be:
-
-```
-1
-2
-3
-4
-5
-1
-2
-3
-4
-5
-```
-
-As you can see, the `peek` operation allows us to perform an action on each element without modifying the original stream. In this example, the peeked stream prints each element twice, once during the `peek` operation and again during the `forEach` operation.
-
-The `peek` operation is useful when you want to perform intermediate operations for debugging or logging purposes while still maintaining the original stream elements. It is commonly used to gain insights into the data flowing through the stream without modifying it.
 
 #### Example
 
-Certainly! Here's an example that demonstrates the use of various intermediate operations in the Java Stream API:
+Here's an example that demonstrates the use of various intermediate operations in the Java Stream API:
 
 ```java
 import java.util.Arrays;
