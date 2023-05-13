@@ -79,7 +79,7 @@ Creating a stream from a collection or array is the starting point for leveragin
 
 In the Java Stream API, operations can be classified into two categories: terminal operations and intermediate operations. Understanding the distinction between these two types of operations is crucial for effectively working with streams.
 
-1. Intermediate Operations:
+### Intermediate Operations
    Intermediate operations are operations that transform a stream into another stream. These operations are usually chained together to form a processing pipeline. Intermediate operations are lazy, meaning they are not executed immediately when called. Instead, they are executed when a terminal operation is invoked on the stream.
 
    Some common intermediate operations include:
@@ -103,7 +103,251 @@ In the Java Stream API, operations can be classified into two categories: termin
 
    In this example, the stream of numbers is filtered to include only even numbers, then each number is doubled using the `map` operation. The resulting stream is collected into a new list.
 
-2. Terminal Operations:
+#### map()
+
+In Java, the `map` operation is an intermediate operation provided by the Stream API. It allows you to transform each element of a stream into another form by applying a function to it. The `map` operation takes a `Function` as its argument, which is a functional interface representing the transformation function.
+
+Here's the syntax of the `map` operation:
+
+```java
+<R> Stream<R> map(Function<? super T, ? extends R> mapper)
+```
+
+- `T` represents the type of elements in the input stream.
+- `R` represents the type of elements in the resulting stream.
+- `mapper` is the transformation function that takes an element of type `T` as input and returns an element of type `R`.
+
+The `map` operation applies the mapper function to each element of the stream and returns a new stream consisting of the transformed elements.
+
+Here's an example that demonstrates the usage of the `map` operation:
+
+```java
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class MapExample {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+
+        // Map names to their lengths
+        List<Integer> nameLengths = names.stream()
+                .map(name -> name.length())
+                .collect(Collectors.toList());
+
+        System.out.println(nameLengths); // Output: [5, 3, 7]
+    }
+}
+```
+
+In this example, we have a list of names. We use the `stream()` method to obtain a stream of elements from the list. Then, we chain the `map` operation, specifying a function that transforms each name into its length using the `length()` method. The `map` operation applies the function to each name and returns a new stream of name lengths.
+
+Finally, we collect the name lengths into a new list using the `collect` terminal operation with the `Collectors.toList()` collector. The resulting list contains the lengths of the names.
+
+The output of the program will be `[5, 3, 7]`, as it maps each name to its length using the `map` operation and collects the transformed values into a new list.
+
+
+
+#### filter()
+
+In Java, the `filter` operation is an intermediate operation provided by the Stream API. It allows you to select elements from a stream based on a given condition. The `filter` operation takes a predicate as its argument, which is a functional interface representing a condition that each element of the stream should satisfy.
+
+Here's the syntax of the `filter` operation:
+
+```java
+Stream<T> filter(Predicate<? super T> predicate)
+```
+
+- `T` represents the type of elements in the stream.
+- `predicate` is the condition that elements must satisfy. It takes an element of type `T` as input and returns a boolean value indicating whether the element should be included in the filtered stream.
+
+The `filter` operation applies the predicate to each element of the stream. If the predicate returns `true` for an element, it is included in the resulting stream. If the predicate returns `false`, the element is filtered out.
+
+Here's an example that demonstrates the usage of the `filter` operation:
+
+```java
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class FilterExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        // Filter even numbers
+        List<Integer> evenNumbers = numbers.stream()
+                .filter(number -> number % 2 == 0)
+                .collect(Collectors.toList());
+
+        System.out.println(evenNumbers); // Output: [2, 4, 6, 8, 10]
+    }
+}
+```
+
+In this example, we have a list of numbers. We use the `stream()` method to obtain a stream of elements from the list. Then, we chain the `filter` operation, specifying a predicate that checks if each number is even (`number % 2 == 0`). The `filter` operation retains only the even numbers in the resulting stream.
+
+Finally, we collect the filtered numbers into a new list using the `collect` terminal operation with the `Collectors.toList()` collector. The resulting list contains only the even numbers.
+
+The output of the program will be `[2, 4, 6, 8, 10]`, as it filters out all the odd numbers from the original list based on the condition provided in the `filter` operation.
+
+Here's an example of using the `filter` intermediate operation with Java streams:
+
+```java
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class FilterExample {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "Dave", "Eve");
+
+        // Filter names starting with "A"
+        List<String> filteredNames = names.stream()
+                .filter(name -> name.startsWith("A"))
+                .collect(Collectors.toList());
+
+        System.out.println(filteredNames); // Output: [Alice]
+    }
+}
+```
+
+In this example, we have a list of names. We use the `stream()` method to obtain a stream of elements from the list. Then, we chain the `filter` intermediate operation, specifying a predicate that checks if each name starts with the letter "A". The `filter` operation retains only the elements that satisfy the predicate.
+
+Finally, we collect the filtered names into a new list using the `collect` terminal operation with the `Collectors.toList()` collector. The resulting list contains only the names that start with "A".
+
+The output of the program will be `[Alice]`, as it filters out all the names except "Alice" based on the condition provided in the `filter` operation.
+
+#### reduce()
+
+In Java, the `reduce` operation is a terminal operation provided by the Stream API. It allows you to combine the elements of a stream into a single result by applying a binary operation repeatedly. The `reduce` operation takes two forms: one that accepts an identity value and another that does not.
+
+Here are the two variations of the `reduce` operation:
+
+1. `reduce(BinaryOperator<T> accumulator)`: This variation of the `reduce` operation does not require an initial value. It takes a `BinaryOperator` as an argument, which specifies the binary operation to be applied to the elements of the stream. The operation is applied successively to the elements from left to right, producing a single result.
+
+2. `reduce(T identity, BinaryOperator<T> accumulator)`: This variation of the `reduce` operation accepts an initial value (identity). It takes an initial value and a `BinaryOperator` as arguments. The identity value is used as the initial accumulated value, and the binary operation is applied to combine the elements of the stream with the accumulated value.
+
+Here's an example that demonstrates the usage of the `reduce` operation:
+
+```java
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+public class ReduceExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+        // Example 1: Reduce without identity
+        Optional<Integer> sum1 = numbers.stream()
+                .reduce((a, b) -> a + b);
+
+        sum1.ifPresent(System.out::println); // Output: 15
+
+        // Example 2: Reduce with identity
+        Integer sum2 = numbers.stream()
+                .reduce(0, (a, b) -> a + b);
+
+        System.out.println(sum2); // Output: 15
+    }
+}
+```
+
+In this example, we have a list of numbers. We use the `stream()` method to obtain a stream of elements from the list. Then, we use the `reduce` operation to calculate the sum of the numbers.
+
+In the first example, we don't provide an initial value (identity) to the `reduce` operation. The binary operation `(a, b) -> a + b` is used to add the numbers together. The result is wrapped in an `Optional` because the stream may be empty. We use the `ifPresent` method to print the sum if it exists.
+
+In the second example, we provide an initial value of `0` to the `reduce` operation. The binary operation `(a, b) -> a + b` is used to add the numbers to the initial value. The result is an `Integer` representing the sum of the numbers.
+
+Both examples produce the same output: `15`, which is the sum of the numbers in the list.
+
+#### flatMap()
+
+In Java, the `flatMap` operation is an intermediate operation provided by the Stream API. It allows you to transform each element of a stream into multiple elements and then flatten the resulting elements into a single stream. The `flatMap` operation takes a function as its argument, which returns a stream for each input element.
+
+Here's the syntax of the `flatMap` operation:
+
+```java
+<R> Stream<R> flatMap(Function<? super T, ? extends Stream<? extends R>> mapper)
+```
+
+- `T` represents the type of elements in the input stream.
+- `R` represents the type of elements in the resulting stream.
+- `mapper` is the function that takes an element of type `T` as input and returns a stream of elements of type `R`.
+
+The `flatMap` operation applies the mapper function to each element of the stream and flattens the resulting streams into a single stream.
+
+Here's an example that demonstrates the usage of the `flatMap` operation:
+
+```java
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class FlatMapExample {
+    public static void main(String[] args) {
+        List<List<Integer>> numbers = Arrays.asList(
+                Arrays.asList(1, 2, 3),
+                Arrays.asList(4, 5, 6),
+                Arrays.asList(7, 8, 9)
+        );
+
+        // Flatten the nested lists into a single stream
+        List<Integer> flattenedNumbers = numbers.stream()
+                .flatMap(list -> list.stream())
+                .collect(Collectors.toList());
+
+        System.out.println(flattenedNumbers); // Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    }
+}
+```
+
+In this example, we have a list of nested lists of numbers. We use the `stream()` method to obtain a stream of elements from the outer list. Then, we chain the `flatMap` operation, specifying a function that returns a stream for each inner list using `list.stream()`. The `flatMap` operation applies this function to each inner list and flattens the resulting streams into a single stream.
+
+Finally, we collect the flattened numbers into a new list using the `collect` terminal operation with the `Collectors.toList()` collector. The resulting list contains all the numbers from the nested lists in a flattened form.
+
+The output of the program will be `[1, 2, 3, 4, 5, 6, 7, 8, 9]`, as the `flatMap` operation flattens the nested lists and combines all the numbers into a single stream.
+
+#### sorted()
+
+In Java, the `sorted` operation is an intermediate operation provided by the Stream API. It allows you to sort the elements of a stream in a specified order. The `sorted` operation can be used with both natural ordering (using the `Comparable` interface) or a custom ordering (using a `Comparator`).
+
+Here are the two variations of the `sorted` operation:
+
+1. `sorted()`: This variation uses the natural ordering of the elements. The elements in the stream must implement the `Comparable` interface to determine their natural order. The sorted stream will be in ascending order.
+
+2. `sorted(Comparator<? super T> comparator)`: This variation uses a custom comparator to determine the order of the elements. The provided `Comparator` object specifies the comparison logic for sorting. The sorted stream will be in the order defined by the comparator.
+
+Here's an example that demonstrates the usage of the `sorted` operation:
+
+```java
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class SortedExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(5, 2, 7, 1, 9);
+
+        // Sort the numbers in ascending order
+        List<Integer> sortedNumbers = numbers.stream()
+                .sorted()
+                .collect(Collectors.toList());
+
+        System.out.println(sortedNumbers); // Output: [1, 2, 5, 7, 9]
+    }
+}
+```
+
+In this example, we have a list of numbers. We use the `stream()` method to obtain a stream of elements from the list. Then, we chain the `sorted` operation without any arguments, which uses the natural ordering of the elements. The `sorted` operation sorts the numbers in ascending order.
+
+Finally, we collect the sorted numbers into a new list using the `collect` terminal operation with the `Collectors.toList()` collector. The resulting list contains the numbers sorted in ascending order.
+
+The output of the program will be `[1, 2, 5, 7, 9]`, as the `sorted` operation arranges the numbers in ascending order.
+
+
+
+### Terminal Operations:
    Terminal operations are operations that produce a final result or a side effect. When a terminal operation is invoked on a stream, the stream is consumed and cannot be reused. Terminal operations trigger the execution of the intermediate operations and produce a result.
 
    Some common terminal operations include:
