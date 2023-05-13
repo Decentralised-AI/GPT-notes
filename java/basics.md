@@ -856,7 +856,7 @@ In Java, an array is a data structure that allows you to store multiple values o
    - Example:
      ```java
      int[][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}; // Two-dimensional array
-     int[][][] cube = {{{1, 2}, {3, 4}}, {{5, 6}, {7, 8}}}; // Three-dimensional array
+     int[][][] cube = {{ {1, 2}, {3, 4}}, {{5, 6}, {7, 8} }}; // Three-dimensional array
      ```
 
 ## Exceptions
