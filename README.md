@@ -1,7 +1,5 @@
 # GPT-notes
 
-* [GPT-notes](https://rafaelaznar.github.io/GPT-notes/)
+* [GPT-notes Jekill](https://rafaelaznar.github.io/GPT-notes/)
+* [GPT-notes GitHub](index.md)
 
-## Languages
-1. [Java](java/index.md)
-2. [Javascript](javascript/index.md)
