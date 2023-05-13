@@ -972,3 +972,29 @@ In the `Main` class, we create a `BankAccount` object and try to withdraw an amo
 When you run this code, it will throw an `InsufficientBalanceException` because the requested withdrawal amount exceeds the initial balance of the account. The exception will be caught in the catch block, and the error message will be displayed.
 
 By creating custom exceptions, you can define and handle exceptional situations that are specific to your application's requirements.
+
+
+##  Java Standard Library
+
+The Java Standard Library, also known as the Java Class Library or the Java API (Application Programming Interface), is a collection of pre-built classes, interfaces, and packages that come with the Java Development Kit (JDK). It provides a wide range of functionality and tools that developers can use to build Java applications.
+
+The Java Standard Library is designed to simplify common programming tasks and provide reusable components, saving developers time and effort. It covers a wide range of areas, including:
+
+1. **Fundamental Classes**: The `java.lang` package contains fundamental classes and utilities, such as basic data types (`Integer`, `Boolean`, etc.), exceptions (`Exception`, `RuntimeException`, etc.), strings (`String`, `StringBuilder`, etc.), and system operations (`System`, `Runtime`, etc.).
+
+2. **Collections Framework**: The `java.util` package provides a powerful collection of interfaces and classes for working with collections of objects. It includes data structures such as lists (`ArrayList`, `LinkedList`), sets (`HashSet`, `TreeSet`), maps (`HashMap`, `TreeMap`), queues (`Queue`, `PriorityQueue`), and more.
+
+3. **Input/Output Operations**: The `java.io` package offers classes for performing input and output operations, including reading from and writing to files (`File`, `FileReader`, `FileWriter`), handling streams (`InputStream`, `OutputStream`), and working with serialization (`ObjectInputStream`, `ObjectOutputStream`).
+
+4. **Networking**: The `java.net` package provides classes for networking operations, such as working with URLs (`URL`, `URLConnection`), sockets (`Socket`, `ServerSocket`), and network protocols (`HTTPURLConnection`, `FTPURLConnection`).
+
+5. **Concurrency**: The `java.util.concurrent` package offers utilities for concurrent and multithreaded programming, including thread pools (`Executor`, `ThreadPoolExecutor`), synchronization (`Lock`, `Semaphore`, `CountDownLatch`), and concurrent data structures (`ConcurrentHashMap`, `ConcurrentLinkedQueue`).
+
+6. **Database Connectivity**: The `java.sql` package provides classes and interfaces for connecting to and interacting with databases using the JDBC (Java Database Connectivity) API. It includes classes for establishing connections (`DriverManager`, `Connection`), executing SQL statements (`Statement`, `PreparedStatement`), and handling result sets (`ResultSet`).
+
+7. **Date and Time**: Starting from Java 8, the `java.time` package introduces a new API for working with dates, times, and intervals. It includes classes for representing dates (`LocalDate`), times (`LocalTime`), date-time combinations (`LocalDateTime`), time zones (`ZoneId`, `ZonedDateTime`), and more.
+
+8. **Security**: The `java.security` package provides classes and algorithms for implementing security features in Java applications. It includes cryptographic operations (`MessageDigest`, `Cipher`), key management (`KeyStore`, `KeyPairGenerator`), secure random number generation (`SecureRandom`), and more.
+
+These are just a few examples of the many packages and classes available in the Java Standard Library. It covers a wide range of functionality, making it a powerful toolset for Java developers. When working on Java projects, the Java Standard Library should be your first resource for common tasks, as it can significantly simplify and accelerate your development process. The Java API documentation is an excellent reference for exploring the available classes, interfaces, and methods in the Java Standard Library.
+
