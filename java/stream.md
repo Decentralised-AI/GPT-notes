@@ -345,10 +345,177 @@ Finally, we collect the sorted numbers into a new list using the `collect` termi
 
 The output of the program will be `[1, 2, 5, 7, 9]`, as the `sorted` operation arranges the numbers in ascending order.
 
+#### limit()
 
+In Java, the `limit` operation is an intermediate operation provided by the Stream API. It allows you to limit the size of a stream by specifying the maximum number of elements to be processed.
+
+The `limit` operation takes a single parameter, which represents the maximum number of elements to be included in the stream. If the stream has fewer elements than the specified limit, all the elements are included.
+
+Here's an example that demonstrates the usage of the `limit` operation:
+
+```java
+import java.util.stream.Stream;
+
+public class StreamLimitExample {
+    public static void main(String[] args) {
+        Stream<Integer> numbers = Stream.of(1, 2, 3, 4, 5);
+
+        Stream<Integer> limitedStream = numbers.limit(3);
+
+        limitedStream.forEach(System.out::println);
+    }
+}
+```
+
+In this example, we have a stream of integers created using the `of` method from `Stream`. We then apply the `limit` operation with a limit of `3`, which means we want to include only the first three elements of the stream.
+
+The `forEach` terminal operation is used to print each element of the limited stream.
+
+The output of the program will be:
+
+```
+1
+2
+3
+```
+
+As you can see, only the first three elements of the stream are processed and printed, while the remaining elements are ignored due to the limit.
+
+The `limit` operation is useful when you want to process a subset of elements from a larger stream, or when you want to avoid processing unnecessary elements when dealing with large data sets.
+
+#### skip()
+
+In Java, the `skip` operation is an intermediate operation provided by the Stream API. It allows you to skip a specified number of elements from the beginning of a stream and continue processing the remaining elements.
+
+The `skip` operation takes a single parameter, which represents the number of elements to be skipped. If the stream has fewer elements than the specified number, an empty stream is returned.
+
+Here's an example that demonstrates the usage of the `skip` operation:
+
+```java
+import java.util.stream.Stream;
+
+public class StreamSkipExample {
+    public static void main(String[] args) {
+        Stream<Integer> numbers = Stream.of(1, 2, 3, 4, 5);
+
+        Stream<Integer> skippedStream = numbers.skip(2);
+
+        skippedStream.forEach(System.out::println);
+    }
+}
+```
+
+In this example, we have a stream of integers created using the `of` method from `Stream`. We then apply the `skip` operation with a value of `2`, which means we want to skip the first two elements of the stream.
+
+The `forEach` terminal operation is used to print each element of the skipped stream.
+
+The output of the program will be:
+
+```
+3
+4
+5
+```
+
+As you can see, the first two elements (1 and 2) are skipped, and the remaining elements (3, 4, and 5) are processed and printed.
+
+The `skip` operation is useful when you want to exclude a certain number of elements from the beginning of a stream, allowing you to focus on a specific subset of the data.
+
+#### peek()
+
+In Java, the `peek` operation is an intermediate operation provided by the Stream API. It allows you to perform a non-destructive operation on each element of the stream while still preserving the stream's original elements.
+
+The `peek` operation takes a `Consumer` functional interface as a parameter. This `Consumer` is applied to each element of the stream, allowing you to perform some side effect or intermediate operation on the element. The `peek` operation does not modify the elements or the stream itself.
+
+Here's an example that demonstrates the usage of the `peek` operation:
+
+```java
+import java.util.stream.Stream;
+
+public class StreamPeekExample {
+    public static void main(String[] args) {
+        Stream<Integer> numbers = Stream.of(1, 2, 3, 4, 5);
+
+        Stream<Integer> peekedStream = numbers.peek(System.out::println);
+
+        peekedStream.forEach(System.out::println);
+    }
+}
+```
+
+In this example, we have a stream of integers created using the `of` method from `Stream`. We then apply the `peek` operation, which uses `System.out.println` as the `Consumer` to print each element of the stream. The `peek` operation does not modify the elements, it simply outputs them to the console.
+
+The `forEach` terminal operation is used to print each element of the peeked stream, again using `System.out.println`.
+
+The output of the program will be:
+
+```
+1
+2
+3
+4
+5
+1
+2
+3
+4
+5
+```
+
+As you can see, the `peek` operation allows us to perform an action on each element without modifying the original stream. In this example, the peeked stream prints each element twice, once during the `peek` operation and again during the `forEach` operation.
+
+The `peek` operation is useful when you want to perform intermediate operations for debugging or logging purposes while still maintaining the original stream elements. It is commonly used to gain insights into the data flowing through the stream without modifying it.
+
+#### Example
+
+Certainly! Here's an example that demonstrates the use of various intermediate operations in the Java Stream API:
+
+```java
+import java.util.Arrays;
+import java.util.List;
+
+public class StreamIntermediateOperationsExample {
+    public static void main(String[] args) {
+        List<String> words = Arrays.asList("hello", "world", "java", "stream", "example");
+
+        List<String> mappedWords = words.stream()
+                .map(String::toUpperCase)                // map operation to convert each word to uppercase
+                .filter(word -> word.length() > 4)       // filter operation to keep words with length greater than 4
+                .sorted()                               // sorted operation to sort the words in natural order
+                .limit(3)                               // limit operation to keep only the first 3 words
+                .collect(Collectors.toList());          // collect the words into a list
+
+        System.out.println("Mapped, filtered, sorted, limited words: " + mappedWords);
+
+        int sumOfLengths = words.stream()
+                .flatMapToInt(word -> word.chars())      // flatMap operation to flatten the characters of each word
+                .peek(System.out::println)              // peek operation to print each character
+                .skip(5)                                // skip operation to skip the first 5 characters
+                .reduce(0, (sum, ch) -> sum + 1);        // reduce operation to count the remaining characters
+
+        System.out.println("Sum of lengths: " + sumOfLengths);
+    }
+}
+```
+
+In this example, we have a list of words, and we perform the following operations:
+
+- `map`: Converts each word to uppercase.
+- `filter`: Keeps only the words with a length greater than 4.
+- `sorted`: Sorts the words in natural order.
+- `limit`: Keeps only the first 3 words.
+- `flatMapToInt`: Flattens the characters of each word into an `IntStream`.
+- `peek`: Prints each character in the stream.
+- `skip`: Skips the first 5 characters.
+- `reduce`: Counts the remaining characters by accumulating a sum.
+
+The results are stored in the `mappedWords` list and the `sumOfLengths` variable, respectively.
+
+Feel free to modify the example or use your own data to explore the behavior of these intermediate operations.
 
 ### Terminal Operations
-   Terminal operations are operations that produce a final result or a side effect. When a terminal operation is invoked on a stream, the stream is consumed and cannot be reused. Terminal operations trigger the execution of the intermediate operations and produce a result.
+
+Terminal operations are operations that produce a final result or a side effect. When a terminal operation is invoked on a stream, the stream is consumed and cannot be reused. Terminal operations trigger the execution of the intermediate operations and produce a result.
 
    Some common terminal operations include:
    - `forEach(Consumer)`: Performs an action on each element of the stream.
@@ -372,9 +539,88 @@ The output of the program will be `[1, 2, 5, 7, 9]`, as the `sorted` operation a
 
 By combining intermediate and terminal operations, you can create powerful data processing pipelines with streams. Intermediate operations allow you to transform and manipulate the data, while terminal operations produce the final result or side effect.
 
+#### Example
+
+Certainly! Here's an example that demonstrates every terminal operation available in the Java Stream API:
+
+```java
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StreamTerminalOperationsExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+        // forEach - prints each element of the stream
+        numbers.stream()
+                .forEach(System.out::println);
+
+        // count - counts the number of elements in the stream
+        long count = numbers.stream()
+                .count();
+        System.out.println("Count: " + count);
+
+        // collect - collects the elements of the stream into a collection
+        List<Integer> squaredNumbers = numbers.stream()
+                .map(n -> n * n)
+                .collect(Collectors.toList());
+        System.out.println("Squared Numbers: " + squaredNumbers);
+
+        // min - finds the minimum element in the stream
+        int min = numbers.stream()
+                .min(Integer::compareTo)
+                .orElseThrow();
+        System.out.println("Min: " + min);
+
+        // max - finds the maximum element in the stream
+        int max = numbers.stream()
+                .max(Integer::compareTo)
+                .orElseThrow();
+        System.out.println("Max: " + max);
+
+        // findFirst - finds the first element in the stream
+        int first = numbers.stream()
+                .findFirst()
+                .orElseThrow();
+        System.out.println("First: " + first);
+
+        // findAny - finds any element in the stream
+        int any = numbers.stream()
+                .findAny()
+                .orElseThrow();
+        System.out.println("Any: " + any);
+
+        // allMatch - checks if all elements satisfy a condition
+        boolean allMatch = numbers.stream()
+                .allMatch(n -> n > 0);
+        System.out.println("All Match: " + allMatch);
+
+        // anyMatch - checks if any element satisfies a condition
+        boolean anyMatch = numbers.stream()
+                .anyMatch(n -> n > 3);
+        System.out.println("Any Match: " + anyMatch);
+
+        // noneMatch - checks if no element satisfies a condition
+        boolean noneMatch = numbers.stream()
+                .noneMatch(n -> n < 0);
+        System.out.println("None Match: " + noneMatch);
+
+        // toArray - converts the stream into an array
+        Integer[] array = numbers.stream()
+                .toArray(Integer[]::new);
+        System.out.println("Array: " + Arrays.toString(array));
+    }
+}
+```
+
+This example demonstrates various terminal operations such as `forEach`, `count`, `collect`, `min`, `max`, `findFirst`, `findAny`, `allMatch`, `anyMatch`, `noneMatch`, `toArray`, and prints their respective results.
+
+Please note that the example assumes you have a list of integers named `numbers` for demonstration purposes. Feel free to modify it as needed or use your own data.
+
 ## Stream Pipeline
 
-Sure! Here's a larger example that demonstrates the use of a streams pipeline in Java:
+Here's a larger example that demonstrates the use of a streams pipeline in Java:
 
 ```java
 import java.util.Arrays;
