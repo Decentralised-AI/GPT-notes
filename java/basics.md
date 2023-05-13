@@ -849,25 +849,7 @@ In Java, an array is a data structure that allows you to store multiple values o
      for (int i = 0; i < numbers.length; i++) {
          System.out.println(numbers[i]);
      }
-     ```     
-   - Here's an example of iterating over an array using the `foreach` loop in Java:
-     ```java
-     int[] numbers = {1, 2, 3, 4, 5};
-     // Iterating over the array using foreach
-     for (int num : numbers) {
-         System.out.println(num);
-     }
      ```
-     In this example, we have an array `numbers` containing five integer values. We use the `foreach` loop to iterate over each element of the array. The loop variable `num` represents the current element being processed in each iteration. Within the loop, we simply print out the value of `num`.
-     When you run this code, it will iterate over the array and print each element on a separate line:
-     ```
-     1
-     2
-     3
-     4
-     5
-     ```
-     The `foreach` loop simplifies the process of iterating over an array by automatically handling the indexing and accessing of elements. It is especially useful when you don't need to track the index or modify the elements during the iteration.
 
 6. Multidimensional Arrays:
    - Java also supports multidimensional arrays, which are arrays of arrays. You can have arrays with two or more dimensions.
