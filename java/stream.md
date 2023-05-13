@@ -703,3 +703,19 @@ Total fruits: 3
 
 This example demonstrates how a streams pipeline can be used to filter, transform, sort, and perform other operations on a stream of data in a concise and readable manner.
 
+## Lazy evaluation
+
+Lazy evaluation and processing of stream elements is a fundamental concept in Java Stream API. It enables efficient and on-demand computation of stream operations, allowing for optimized performance and resource utilization. Here's how lazy evaluation works in Java streams:
+
+1. **Intermediate Operations**: Intermediate operations, such as `filter`, `map`, `flatMap`, `sorted`, and `distinct`, are lazily evaluated. When an intermediate operation is invoked on a stream, it doesn't immediately perform the operation on all elements. Instead, it creates a new stream that represents the pipeline of operations to be applied.
+
+2. **Chaining Operations**: Intermediate operations can be chained together to form a pipeline of operations. Each operation modifies the stream, but the actual processing is deferred until a terminal operation is called. This chaining mechanism allows for the creation of complex and efficient computation patterns without explicitly iterating over the elements.
+
+3. **Short-Circuiting Operations**: Short-circuiting operations, such as `findFirst`, `findAny`, `anyMatch`, `allMatch`, and `noneMatch`, further leverage lazy evaluation. They terminate the stream as soon as the desired condition is met, without processing all the remaining elements. This early termination saves unnecessary computation and improves performance.
+
+4. **Terminal Operations**: Terminal operations, like `forEach`, `collect`, `reduce`, `count`, and `min/max`, trigger the actual processing of the stream. When a terminal operation is invoked, the stream pipeline is executed, and the elements are processed sequentially or in parallel, depending on the stream characteristics.
+
+Lazy evaluation allows for more efficient resource usage, as it avoids unnecessary computations on elements that are not required for the final result. It also enables parallel execution of stream operations, where multiple elements can be processed concurrently, further enhancing performance.
+
+It's important to note that lazy evaluation in streams doesn't mean that the operations are deferred indefinitely. Once a terminal operation is called, the stream operations are executed, and the result is produced. Lazy evaluation simply delays the computation until it is necessary, optimizing the processing of stream elements.
+
