@@ -379,5 +379,180 @@ You can define multiple `<servlet>` and `<servlet-mapping>` elements in the `web
 
 Remember to adjust the servlet class name and the package name (`com.example.MyServlet`) according to your application's structure.
 
+## JSP (JavaServer Pages) is a technology used in web development to create dynamic web pages. It allows you to combine HTML markup with Java code to generate dynamic content that can be sent to the client's web browser.
+
+Here are some key points about JSP:
+
+1. Structure: JSP files have a `.jsp` extension and contain a mix of HTML, XML, and Java code. The Java code is embedded within special tags, typically using the `<% %>` or `${ }` syntax.
+
+2. Dynamic Content: JSP enables the dynamic generation of content. You can use Java code within the JSP file to generate dynamic data, interact with databases, perform calculations, and more. This allows you to create dynamic web pages that can adapt to user input or changing conditions.
+
+3. Simplified Development: JSP provides a simplified approach to web development by allowing the integration of Java code directly into the HTML markup. This makes it easier to generate dynamic content without the need for extensive scriptlets or separate server-side code files.
+
+4. Server-side Processing: JSP files are processed on the server-side by a web container, such as Apache Tomcat. The server processes the JSP file, executes the embedded Java code, and generates HTML or other client-readable output. The resulting output is then sent to the client's web browser.
+
+5. Expression Language (EL): JSP also includes an Expression Language, which provides a simplified way to access data and evaluate expressions within the JSP page. EL expressions are typically written using `${ }` syntax and allow you to access variables, invoke methods, and perform other operations.
+
+6. Tag Libraries: JSP supports the use of tag libraries, which provide a set of custom tags that can be used to perform specific functions or access external resources. Tag libraries enhance the functionality of JSP pages and simplify complex tasks, such as database access or form processing.
+
+Overall, JSP is a powerful technology for building dynamic web pages. It combines the ease of HTML markup with the flexibility of Java code, allowing developers to create dynamic and interactive web applications.
 
 
+## Example
+
+Here's a simple example of a JSP file:
+
+```jsp
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello JSP Example</title>
+</head>
+<body>
+    <h1>Hello, <%= request.getParameter("name") %>!</h1>
+</body>
+</html>
+```
+
+In this example, the JSP file is used to generate a dynamic greeting message. The `<%= ... %>` syntax is used to embed Java code within the HTML markup. In this case, the `request.getParameter("name")` retrieves the value of the `name` parameter from the HTTP request and includes it in the greeting message.
+
+When this JSP file is accessed through a web browser, the server will process it, execute the embedded Java code, and generate an HTML response that includes the dynamic greeting message.
+
+Assuming you have a servlet or a web framework properly configured to handle requests and map them to this JSP file, you can access it by navigating to its URL, such as `http://localhost:8080/example/hello.jsp?name=John`, where `example` is the context path and `hello.jsp` is the JSP file name.
+
+The resulting page would display "Hello, John!" as the greeting message.
+
+## Example
+
+```jsp
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello JSP Example</title>
+</head>
+<body>
+    <h1>Hello, <%= request.getParameter("name") %>!</h1>
+    
+    <form action="hello.jsp" method="GET">
+        <label for="nameInput">Enter your name:</label>
+        <input type="text" id="nameInput" name="name">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+```
+
+In this updated example, the JSP file not only displays the greeting message based on the provided name parameter, but it also includes a form that allows users to enter their name. When the form is submitted, the name value is sent as a query parameter in the URL to the same JSP file.
+
+So, when you access the JSP file, you'll see the greeting message if the `name` parameter is present in the URL, and the form to enter a name. When you submit the form, the page will reload with the new greeting message based on the entered name.
+
+Remember to make sure your servlet or web framework is properly configured to handle the form submission and map it to the JSP file.
+
+### Scriptlets, Expressions and Declarations
+
+In JSP (JavaServer Pages), you can use three types of elements to embed Java code within an HTML-like syntax: scriptlets, expressions, and declarations.
+
+1. Scriptlets: Scriptlets allow you to include arbitrary Java code within the JSP file. They are enclosed within `<% %>` tags. You can write any valid Java code inside the scriptlet, which will be executed at the server-side when the JSP is processed. For example:
+
+   ```jsp
+   <% 
+       String message = "Hello, World!";
+       out.println(message);
+   %>
+   ```
+
+   In the above example, the scriptlet declares a variable `message` and assigns it the value "Hello, World!". The `out` object is used to write the message to the response.
+
+   Note that scriptlets can make your code less maintainable and harder to read, so it's generally recommended to minimize their usage and separate business logic from the presentation layer.
+
+2. Expressions: Expressions allow you to evaluate and display the result of a Java expression within the JSP. They are enclosed within `${ }` tags. The expression is evaluated at the server-side, and the result is converted to a string and included in the response. For example:
+
+   ```jsp
+   <p>Today's date is: ${new java.util.Date()}</p>
+   ```
+
+   In the above example, the expression `${new java.util.Date()}` is evaluated, and the current date and time are displayed in the response.
+
+   Expressions are useful for displaying dynamic content directly within the HTML markup.
+
+3. Declarations: Declarations are used to define variables and methods that are accessible within the JSP. They are enclosed within `<%! %>` tags. Declarations are typically used to define utility methods or variables that can be reused throughout the JSP. For example:
+
+   ```jsp
+   <%!
+       private int calculateSum(int a, int b) {
+           return a + b;
+       }
+   %>
+   ```
+
+   In the above example, a declaration is used to define a private method `calculateSum` that calculates the sum of two integers. The method can be called from other parts of the JSP file.
+
+   Declarations are useful for encapsulating reusable logic within the JSP.
+
+It's important to note that scriptlets and declarations can lead to mixing presentation and business logic, which can make the code harder to maintain. It's generally recommended to use expressions and separate the business logic into separate Java classes (such as servlets) to achieve better code organization and separation of concerns.
+
+
+### Page directives
+
+Page directives in JSP (JavaServer Pages) are special instructions that provide configuration settings and control the behavior of the JSP page. They are typically placed at the top of the JSP file and are enclosed within `<%@ %>` tags. Page directives are processed by the JSP container during the translation phase before the JSP is executed.
+
+There are several types of page directives available in JSP:
+
+1. `page`: The `page` directive is used to specify various attributes related to the JSP page itself. Some commonly used attributes include:
+
+   - `language`: Specifies the scripting language used in the JSP. For example, `<%@ page language="java" %>`.
+   - `contentType`: Specifies the content type of the response generated by the JSP. For example, `<%@ page contentType="text/html; charset=UTF-8" %>`.
+   - `import`: Specifies additional Java classes to import. For example, `<%@ page import="java.util.List" %>`.
+   - `session`: Specifies whether the JSP should have access to the session object. For example, `<%@ page session="false" %>`.
+   - `errorPage`: Specifies the URL of a custom error page to redirect to in case of an unhandled exception. For example, `<%@ page errorPage="/error.jsp" %>`.
+
+2. `include`: The `include` directive is used to include the content of another file into the current JSP page during the translation phase. This is similar to the `include` directive in HTML. For example, `<%@ include file="header.jsp" %>`. The included file can be a JSP or any other file, such as HTML or text.
+
+3. `taglib`: The `taglib` directive is used to define and import custom tag libraries into the JSP page. It specifies the location of the tag library descriptor (TLD) file and assigns a prefix that can be used to reference the custom tags within the JSP. For example, `<%@ taglib uri="/WEB-INF/mytags" prefix="my" %>`.
+
+Page directives provide essential control over JSP behavior and configuration settings. They allow you to specify the scripting language, import necessary classes, set the content type, define custom tag libraries, and more. By utilizing page directives effectively, you can customize the behavior and functionality of your JSP pages.
+
+### Example
+
+```jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page import="java.util.Date" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Example JSP</title>
+</head>
+<body>
+    <%-- Page Directive Example --%>
+    <h1>Current Date and Time:</h1>
+    <p><%= new Date() %></p>
+
+    <%-- Declaration Example --%>
+    <%!
+        private String greeting = "Hello, World!";
+
+        public String getGreeting() {
+            return greeting;
+        }
+    %>
+
+    <%-- Using the Declaration --%>
+    <h2>Greeting:</h2>
+    <p><%= getGreeting() %></p>
+</body>
+</html>
+```
+
+In this example, we have used two page directives:
+
+- The `language` attribute is set to "java" to specify that we'll be using Java as the scripting language for the JSP.
+- The `contentType` attribute is set to "text/html; charset=UTF-8" to specify the content type of the response generated by the JSP.
+
+We have also used a declaration to declare a private `greeting` variable and a `getGreeting()` method. The declaration block is enclosed within `<%! %>` tags.
+
+The JSP page then includes the usage of these directives and declaration. The current date and time is displayed using an expression `<%= new Date() %>`, which evaluates to the current date and time.
+
+Below that, the `getGreeting()` method from the declaration is called using `<%= getGreeting() %>`, and the result is displayed as the greeting message.
+
+This example demonstrates the use of page directives to set configuration options and declarations to define variables and methods within the JSP page.
