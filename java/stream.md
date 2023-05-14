@@ -703,6 +703,91 @@ Total fruits: 3
 
 This example demonstrates how a streams pipeline can be used to filter, transform, sort, and perform other operations on a stream of data in a concise and readable manner.
 
+## Stream Collectors
+
+Stream collectors in Java provide a convenient way to accumulate elements from a stream into various data structures or perform aggregations. They are used with the `collect()` terminal operation of streams and allow you to collect elements and perform complex transformations or aggregations in a concise and efficient manner. Here's an overview of the key features and functionalities of stream collectors:
+
+1. **Predefined Collectors**: Java provides a set of predefined collectors in the `Collectors` class that cover common use cases. These include collectors to create lists, sets, maps, join strings, perform grouping and partitioning, calculate sums, averages, and more.
+
+2. **Custom Collectors**: Stream collectors can also be customized to meet specific requirements by using the `Collectors.collectingAndThen()` method or by creating a custom collector using the `Collector` interface. This allows for flexible and tailored collection operations.
+
+3. **Aggregation and Reduction**: Stream collectors can perform aggregation operations, such as summing, averaging, counting, or finding minimum and maximum values, using collectors like `summingInt()`, `averagingDouble()`, `counting()`, `minBy()`, and `maxBy()`.
+
+4. **Grouping and Partitioning**: Collectors support grouping elements based on specific criteria using `groupingBy()` and partitioning elements into true and false groups using `partitioningBy()`. These collectors are particularly useful when dealing with complex data transformations and analyses.
+
+5. **Joining and String Concatenation**: Stream collectors offer convenient methods to join elements into a single string using separators and prefixes or suffixes. The `joining()` collector is commonly used to concatenate strings from a stream.
+
+6. **Custom Accumulators**: Collectors allow you to define custom accumulation logic by implementing the `Collector` interface. This enables you to perform advanced operations and combine elements in a specific way.
+
+7. **Parallel Processing**: Stream collectors are designed to work efficiently in parallel streams. They handle concurrent accumulation of partial results and merging of intermediate values, ensuring thread-safety and optimal performance.
+
+Stream collectors provide a powerful and flexible mechanism for collecting and transforming data from streams. They promote clean and expressive code by encapsulating complex operations into reusable and composable collectors. By mastering the usage of stream collectors, you can leverage the full potential of the Java Stream API and write elegant and efficient code for data processing and analysis.
+
+
+### Example
+
+Here's a script that covers some commonly used stream collectors and their usage:
+
+```java
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class StreamCollectorsExample {
+
+    public static void main(String[] args) {
+        // Example data
+        List<String> names = List.of("John", "Alice", "Bob", "Alice", "John");
+        
+        // Collect to List
+        List<String> collectedList = names.stream()
+                .collect(Collectors.toList());
+        System.out.println("Collected List: " + collectedList);
+        
+        // Collect to Set
+        Set<String> collectedSet = names.stream()
+                .collect(Collectors.toSet());
+        System.out.println("Collected Set: " + collectedSet);
+        
+        // Collect to Map
+        Map<String, Integer> collectedMap = names.stream()
+                .collect(Collectors.toMap(
+                        name -> name,
+                        name -> name.length(),
+                        (existingValue, newValue) -> existingValue));
+        System.out.println("Collected Map: " + collectedMap);
+        
+        // Grouping elements
+        Map<Integer, List<String>> groupedMap = names.stream()
+                .collect(Collectors.groupingBy(String::length));
+        System.out.println("Grouped Map: " + groupedMap);
+        
+        // Joining elements
+        String joinedString = names.stream()
+                .collect(Collectors.joining(", "));
+        System.out.println("Joined String: " + joinedString);
+        
+        // Summing integers
+        int sum = names.stream()
+                .mapToInt(String::length)
+                .sum();
+        System.out.println("Sum: " + sum);
+        
+        // Averaging integers
+        double average = names.stream()
+                .mapToInt(String::length)
+                .average()
+                .orElse(0);
+        System.out.println("Average: " + average);
+    }
+}
+```
+
+This script demonstrates the usage of various collectors, including `toList()`, `toSet()`, `toMap()`, `groupingBy()`, `joining()`, `summingInt()`, and `averagingInt()`. By running this script, you can see the output for each collector and understand how to apply them in different scenarios.
+
+Feel free to modify the example and experiment with different stream operations and collectors to gain a better understanding of their functionality and usage.
+
 ## Lazy evaluation
 
 Lazy evaluation and processing of stream elements is a fundamental concept in Java Stream API. It enables efficient and on-demand computation of stream operations, allowing for optimized performance and resource utilization. Here's how lazy evaluation works in Java streams:
