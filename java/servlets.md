@@ -30,7 +30,43 @@ Servlets offer several advantages for web application development:
 
 Overall, Java Servlets provide a robust foundation for building web applications in Java. They offer flexibility, scalability, and platform independence, making them a popular choice for developers working on web-based projects.
 
+## Hierarchy
 
+The inheritance hierarchy for a typical servlet:
+
+```
+java.lang.Object
+    |
+javax.servlet.GenericServlet
+    |
+javax.servlet.http.HttpServlet
+```
+
+In this hierarchy, the `javax.servlet.GenericServlet` class serves as a base class for servlets. It provides a generic implementation of the `javax.servlet.Servlet` interface and contains common methods for servlet initialization, service handling, and lifecycle management.
+
+The `javax.servlet.http.HttpServlet` class extends `GenericServlet` and provides additional functionality specifically for handling HTTP requests and responses. It includes methods such as `doGet()`, `doPost()`, `doPut()`, etc., which can be overridden in subclasses to handle specific HTTP methods.
+
+Servlet classes that you create typically extend `HttpServlet` to inherit its HTTP-specific capabilities and override its methods to provide custom handling for different types of requests.
+
+In the servlet hierarchy, the `javax.servlet.GenericServlet`, `javax.servlet.http.HttpServlet`, and user-defined servlet classes have different methods related to initialization and request handling.
+
+1. `javax.servlet.GenericServlet`:
+   - `init(ServletConfig)`: This method is called by the servlet container during initialization to allow the servlet to perform any necessary setup tasks. It is typically overridden by the user-defined servlet to provide initialization logic. The `ServletConfig` parameter contains configuration information for the servlet.
+   - `service(ServletRequest, ServletResponse)`: This method is responsible for handling incoming requests and generating responses. It is a generic method that can handle any type of request. The default implementation of this method in `GenericServlet` delegates the request handling to the appropriate HTTP-specific `doXXX()` method based on the request method (e.g., `doGet()`, `doPost()`, etc.).
+
+2. `javax.servlet.http.HttpServlet`:
+   - `init(ServletConfig)`: This method is inherited from `GenericServlet` and can be overridden to provide HTTP-specific initialization logic.
+   - `service(HttpServletRequest, HttpServletResponse)`: This method is an overloaded version of the `service()` method in `GenericServlet`, specifically designed for handling HTTP requests. It takes `HttpServletRequest` and `HttpServletResponse` as parameters, allowing access to HTTP-specific request and response information. The `service()` method in `HttpServlet` checks the request method and delegates the request handling to the appropriate `doXXX()` method based on the HTTP method.
+
+3. User-defined servlet class:
+   - `init(ServletConfig)`: This method can be overridden to provide any custom initialization logic specific to the user's servlet.
+   - `service(HttpServletRequest, HttpServletResponse)`: This method is typically overridden to handle the specific HTTP methods that the servlet is intended to support, such as `doGet()`, `doPost()`, `doPut()`, etc. By overriding these methods, the servlet can provide custom request handling and generate appropriate responses.
+
+Regarding whether it is good practice to override these methods, it depends on the specific requirements of your application. In most cases, it is common to override the `init()` method to perform initialization tasks, such as setting up database connections, initializing resources, or loading configuration data. It is also common to override the `doGet()` or `doPost()` methods (or other HTTP method-specific methods) to handle the corresponding HTTP requests and generate appropriate responses.
+
+However, it is important to note that the `service()` method, which is responsible for routing requests to the appropriate HTTP method-specific methods, should generally not be overridden unless you have a specific reason to do so. The default implementation of `service()` in `HttpServlet` provides the necessary logic to dispatch requests based on the HTTP method. Overriding `service()` can disrupt this behavior and may require you to handle request routing manually.
+
+In summary, overriding the `init()` method and HTTP method-specific methods is common practice, while overriding the `service()` method should be done with caution and a clear understanding of the implications.
 
 
 
